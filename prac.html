@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
     <link rel="stylesheet" href="prac.css">
     <title>Document</title>
 </head>
@@ -16,7 +17,7 @@
                 <li>
                     <a id="home" onclick="homes()">Home</a>
                     <a id="shop" onclick="shops()">Shops</a>
-                    <a id="blog" onclick="blogs()">Blog</a>
+                    <!-- <a id="blog" onclick="blogs()">Blog</a> -->
                     <a id="about" onclick="abouts()">About</a>
                     <a id="contact" onclick="contacts()">Contact</a>
                     <i class="fa-sharp fa-solid fa-cart-shopping"></i>
@@ -52,9 +53,13 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i> <br>
-                        <button>Add to Cart</button>
+                        <button onclick="addCart()">Add to Cart</button>
+                        <button class="more-Info" onclick="moreInfo()" >more</button>
                     </div>
-                 </div>
+                </div>
+
+                
+
 
                  <div class="crd">
                     <img src="srt2.webp" alt="" onclick="show(this)">
@@ -65,7 +70,8 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i> <br>
-                        <button>Add to Cart</button>
+                        <button onclick="addCart()">Add to Cart</button>
+                        <button class="more-Info" onclick="moreInfo()">more</button>
                     </div>
                  </div>
 
@@ -77,8 +83,9 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star-sharp-half-stroke"></i>
-                        <button>Add to Cart</button>
+                        <i class="fa-solid fa-star-sharp-half-stroke"></i><br>
+                        <button onclick="addCart()">Add to Cart</button>
+                        <button class="more-Info" onclick="moreInfo()">more</button>
                     </div>
                  </div>
 
@@ -101,7 +108,8 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i> <br>
-                        <button>Add to Cart</button>
+                        <button onclick="addCart()">Add to Cart</button>
+                        <button class="more-Info" onclick="moreInfo()">more</button>
                     </div>
                 </div>
 
@@ -115,7 +123,8 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-sharp-half-stroke"></i>
                          <br>
-                        <button>Add to Cart</button>
+                        <button onclick="addCart()">Add to Cart</button>
+                        <button onclick="moreInfo()">more</button>
                     </div>
                 </div>
 
@@ -128,10 +137,20 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i> <br>
-                        <button>Add to Cart</button>
+                        <button onclick="addCart()">Add to Cart</button>
+                        <button onclick="moreInfo()">more</button>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div id="more-sections">
+            <!-- Sections will be inserted here -->
+        </div>
+
+        <div class="button">
+            <button id="show-more" onclick="showMore()">Show More</button>
+            <button id="go-home" onclick="goHome()" style="display: none;">Go Back Home</button>
         </div>
 
         <!-- about us -->
@@ -144,7 +163,7 @@
             </div>
 
             <div class="me">
-                <img src="lap.png" alt="">
+                <img src="lap (1).png" alt="">
                 <div class="aboutText">
                     <h1>Who we are ?</h1>
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing Dolorum corrupti consequuntur sunt ipsam aperiam vel magni sequi eos sit amet consectetur adipisicing Dolorum corrupti consequuntur sunt ipsam aperiam vel magni sequi eos atque nam maxime dolorem fuga, rem eum iure quidem! Illo corporis, asperiores ipsum excepturi voluptates necessitatibus consectetur odit omnis hic praesentium autem, officiis dignissimos assumenda saepe.</p>
@@ -185,30 +204,30 @@
         </div>
         <!-- cart.... -->
 
-        <div class="cart">
+        <div class="cart" id="carto">
             <img id="newImg" src="" alt="">
             <div class="cartText">
-                <h1>Trends Offer : Trending Shop <br>
+                    <h1>Trends Offer : Trending Shop <br>
                     Now</h1>
                     <h2>Special Price</h2>
                     <h2>$11</h2>
                     <p>Lorem ipsum dolor sit, amet consectetur adipisicing.</p>
                     <p>Lorem ipsum dolor sit, amet consectetur adipisicing.</p>
                     <p>Lorem ipsum dolor sit, amet consectetur adipisicing.</p>
-                   <div class="btn">
-                    <button>Buy Now</button>
-                    <button onclick="addCart()">Add to Cart</button>
-                   </div>
-                   <button  class="back">Back</button>
+                    <div class="btn">
+                        <button>Buy Now</button>
+                        <button onclick="addCart()">Add to Cart</button>
+                    </div>
+                   <button  class="popup-close" onclick="closeButton()">Close</button>
 
 
 
             </div>
-         </div>
+        </div>
 
          <!-- trends.... -->
 
-         <div class="trends">
+         <!-- <div class="trends">
             <div class="head">
                 <h1>Trends <span>Men's Wear</span></h1>
             </div>
@@ -222,10 +241,10 @@
 
                     </div>
 
-                </div>
+                </div> -->
                 <!-- blog..... -->
 
-                <div class="blog">
+                <!-- <div class="blog">
                     <img src="tr3.webp" alt="">
                     <div class="blogText">
                         <h2>Trending Boys Cloths</h2>
@@ -236,7 +255,7 @@
 
                 </div>
             </div>
-         </div>
+         </div> -->
 
          <!-- letter.... -->
          <div class="letter">
