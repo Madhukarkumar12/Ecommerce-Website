@@ -372,3 +372,55 @@ ul li i:hover{
 .footerText p{
     margin-top: 11px;
 }
+
+/* project description.... */
+.description {
+    /* max-width: 600px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; */
+    /* display: flex;
+    justify-content: center; */
+    padding: 22px;
+    margin-top: 22px;
+    /* border-radius: 8px; */
+    /* display: none; */
+    border: 2px solid #000;
+    margin-bottom: 22px;
+    border-radius: 8px;
+
+}
+
+.description h2 {
+     /* margin-top: 0; */
+    color: #333;
+    font-size: 24px; 
+    margin-top: 11px;
+    /* border: 2px solid #000; */
+}
+
+.description p {
+     color: #555;
+    line-height: 1.6; 
+    margin-top: 12px;
+}
+.pop{
+    display: flex;
+    justify-content: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* border: 2px solid #000; */
+    display: none;
+    /* transform: translate(-50%, -50%); */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    /* text-align: center; Center text inside */
+/* } */ 
