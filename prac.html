@@ -54,7 +54,7 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i> <br>
                         <button onclick="addCart()">Add to Cart</button>
-                        <button class="more-Info" onclick="moreInfo()" >more</button>
+                        <button class="more-Info" onclick="moreInfo(this)" data-image="./assets/images/srt1.webp">more</button>
                     </div>
                 </div>
 
@@ -71,7 +71,7 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i> <br>
                         <button onclick="addCart()">Add to Cart</button>
-                        <button class="more-Info" onclick="moreInfo()">more</button>
+                        <button class="more-Info" onclick="moreInfo(this)" data-image="./assets/images/srt2.webp">more</button>
                     </div>
                  </div>
 
@@ -85,7 +85,7 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-sharp-half-stroke"></i><br>
                         <button onclick="addCart()">Add to Cart</button>
-                        <button class="more-Info" onclick="moreInfo()">more</button>
+                        <button class="more-Info" onclick="moreInfo(this)" data-image="./assets/images/srt6.webp">more</button>
                     </div>
                  </div>
 
@@ -109,7 +109,7 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i> <br>
                         <button onclick="addCart()">Add to Cart</button>
-                        <button class="more-Info" onclick="moreInfo()">more</button>
+                        <button class="more-Info" onclick="moreInfo(this)" data-image="./assets/images/wn4.webp">more</button>
                     </div>
                 </div>
 
@@ -124,7 +124,7 @@
                         <i class="fa-solid fa-star-sharp-half-stroke"></i>
                          <br>
                         <button onclick="addCart()">Add to Cart</button>
-                        <button onclick="moreInfo()">more</button>
+                        <button onclick="moreInfo(this)" data-image="./assets/images/wn5.webp">more</button>
                     </div>
                 </div>
 
@@ -138,7 +138,7 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i> <br>
                         <button onclick="addCart()">Add to Cart</button>
-                        <button onclick="moreInfo()">more</button>
+                        <button onclick="moreInfo(this)" data-image="./assets/images/wn6.webp">more</button>
                     </div>
                 </div>
             </div>
@@ -206,6 +206,7 @@
 
         <div class="cart" id="carto">
             <img id="newImg" src="" alt="">
+            <span class="popup-close" id="popup_Close">&times;</span>
             <div class="cartText">
                     <h1>Trends Offer : Trending Shop <br>
                     Now</h1>
@@ -218,20 +219,24 @@
                         <button>Buy Now</button>
                         <button onclick="addCart()">Add to Cart</button>
                     </div>
-                   <button  class="popup-close" onclick="closeButton()">Close</button>
+                   <!-- <button  class="popup-close" onclick="closeButton()">Close</button> -->
 
 
 
             </div>
         </div>
 
-        <div class="pop">
+        
+        <!-- <div class="pop">
+            <img id="newImg" src="" alt="">
             <div class="description" id="desc">
                 <h2>Project Title</h2>
                 <p>This project is about creatingThe obj It .</p>
                 <p>it is cutton shirt...</p>
+                <button  class="popup-close" onclick="closeButton()">Close</button>
             </div>
-        </div>
+            
+        </div> -->
 
          <!-- trends.... -->
 
@@ -314,6 +319,25 @@
 
             </div>
         </div>
+
+        <div class="popup-overlay" id="popupOverlay"></div>
+
+        <div class="popup-content" id="popupContent">
+            <span class="popup-close" id="popupClose">&times;</span>
+            <div>
+                <img src="" alt="" id="new-Img">
+            </div>
+            <div class="popup-header">Trending shops</div>
+            <div class="popup-body">
+                Soft and breathable, this classic white cotton T-shirt is perfect for layering or wearing solo.
+            </div>
+            <!-- <input type="text" class="popup-input" placeholder="First Name">
+            <input type="email" class="popup-input" placeholder="Email Address">
+            <button class="popup-button">Sign Up</button> -->
+        </div>
+
+        
+
     
 
 

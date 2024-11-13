@@ -5,7 +5,8 @@ let about = document.querySelector(".about");
 let contact = document.querySelector(".contact");
 // let blog = document.querySelector(".trends");
 let mainPage = document.querySelector(".main");
-
+let letter=document.querySelector(".letter");
+let footer=document.querySelector(".footer")
 
 
 function homes(){
@@ -100,6 +101,15 @@ function show(img){
     let newImg = document.getElementById("newImg");
     // console.log(img);
     newImg.src=img.src;
+    newImg.style.width='200px'
+    newImg.style.height='300px'
+    newImg.style.objectFit='cover'
+    newImg.style.marginTop='40px'
+    newImg.style.marginBottom='30px'
+    newImg.style.borderRadius='10px'
+    letter.style.display='none'
+    footer.style.display='none'
+
 
     mainPage.style.display="none";
     card.style.display="none";
@@ -137,13 +147,13 @@ function addCart(){
 //         popup.style.display = 'none';
 //     }, 5000);
 // });
-function moreInfo(){
-    mainPage.style.display="none";
-    card.style.display="none";
-    card2.style.display="none";
+function moreInfo(button){
+    // mainPage.style.display="none";
+    // card.style.display="none";
+    // card2.style.display="none";
     // blog.style.display="none";
-    about.style.display="none";
-    contact.style.display="none";
+    // about.style.display="none";
+    // contact.style.display="none";
     // document.querySelector(".cart").style.display="flex";
     // document.querySelector(".cart").style.position="fixed";
     // document.querySelector(".cart").style.top="50%";
@@ -153,9 +163,18 @@ function moreInfo(){
     // document.querySelector(".cart").style.padding="20px";
     // document.querySelector(".cart").style.borderRadius="5px";
     // document.querySelector(".cart").style.boxShadow="0px 0px 10px rgba(0, 0, 0, 0.5)";
-    document.getElementById("more-sections").style.display="none"
-    document.querySelector(".pop").style.display="flex"
-    document.getElementById("show-more").style.display="none"
+    // document.getElementById("more-sections").style.display="none"
+    // document.querySelector(".pop").style.display="flex"
+    // document.getElementById("show-more").style.display="none"
+    
+    const imageUrl=button.getAttribute("data-image");
+    const popImage=document.getElementById("new-Img");
+    popImage.style.width="150px"
+    popImage.style.height="150px"
+    popImage.style.objectFit="cover"
+    popImage.src=imageUrl;
+    document.getElementById("popupOverlay").style.display = "block";
+    document.getElementById("popupContent").style.display = "block";
 
     
     
@@ -166,15 +185,17 @@ function moreInfo(){
 
     setTimeout(() => {
         // document.querySelector(".cart").style.display="none";
-        document.querySelector(".pop").style.display="none"
-        document.getElementById("show-more").style.display="block"
-        mainPage.style.display="flex";
-        card.style.display="block";
-        card2.style.display="block";
-        document.getElementById("more-sections").style.display="block"
+        // document.querySelector(".pop").style.display="none"
+        // document.getElementById("show-more").style.display="block"
+        // mainPage.style.display="flex";
+        // card.style.display="block";
+        // card2.style.display="block";
+        // document.getElementById("more-sections").style.display="block"
         // blog.style.display="block";
         // about.style.display="block";
         // contact.style.display="block";
+        document.getElementById("popupOverlay").style.display = "none";
+        document.getElementById("popupContent").style.display = "none";
         
     }, 5000);
 }
@@ -189,6 +210,18 @@ function closeButton(){
     // contact.style.display="block";
 
 }
+
+document.getElementById("popup_Close").onclick = function() {
+    // document.getElementById("popupOverlay").style.display = "none";
+    // document.getElementById("popupContent").style.display = "none";
+    // document.querySelector(".cart").style.display="none";
+    // mainPage.style.display="flex";
+    // card.style.display="block";
+    // card2.style.display="block";
+    // document.getElementById('show-more').style.display='block';
+    window.location.href = "prac.html";
+
+};
 
 // closeButton.addEventListener('click', () => {
 //     popup.style.display = 'none';
@@ -414,7 +447,10 @@ function createProductSection(titleText, products) {
 
         const moreInfoButton = document.createElement('button');
         moreInfoButton.className = 'more-Info';
-        moreInfoButton.onclick = moreInfo;
+        moreInfoButton.onclick = function(){moreInfo(this);};
+        // killer approach....
+        moreInfoButton.setAttribute('data-image', img.src);
+
         moreInfoButton.textContent = 'more';
         crdTextDiv.appendChild(moreInfoButton);
 
@@ -431,25 +467,25 @@ const sectionsData = [
     {
         title: 'Foot Wear',
         products: [
-            { name: 'Trending Slipper', image: './assets/images/slipper.webp', alt: 'Slipper' },
-            { name: 'Trending Shoes', image: './assets/images/shoes.webp', alt: 'Shoes' },
-            { name: 'Trending Crocks', image: './assets/images/crockse.webp', alt: 'Crocks' }
+            { name: 'Trending Slipper', image: './assets/images/slipper.jpg', alt: 'Slipper' },
+            { name: 'Trending Shoes', image: './assets/images/shoes.jpg', alt: 'Shoes' },
+            { name: 'Trending Crocks', image: './assets/images/crocks.jpg', alt: 'Crocks' }
         ]
     },
     {
         title: 'Bags',
         products: [
-            { name: 'Trending Backpacks', image: './assets/images/bagpack.webp', alt: 'Backpack' },
-            { name: 'Trending Handbags', image: './assets/images/handbag.webp', alt: 'Handbag' },
-            { name: 'Trending Travel-bags', image: './assets/images/travelling_bag.webp', alt: 'Travel Bag' }
+            { name: 'Trending Backpacks', image: './assets/images/bagpack.jpg', alt: 'Backpack' },
+            { name: 'Trending Handbags', image: './assets/images/handbag.jpg', alt: 'Handbag' },
+            { name: 'Trending Travel-bags', image: './assets/images/travelling_bag.jpg', alt: 'Travel Bag' }
         ]
     },
     {
         title: 'Accessories',
         products: [
-            { name: 'Trending Watches', image: './assets/images/watch.webp', alt: 'Watch' },
-            { name: 'Trending Sun-glass', image: './assets/images/sunglass.webp', alt: 'Sunglass' },
-            { name: 'Trending Belt', image: './assets/images/belt.webp', alt: 'Belt' }
+            { name: 'Trending Watches', image: './assets/images/watch.jpg', alt: 'Watch' },
+            { name: 'Trending Sun-glass', image: './assets/images/sunglass.jpg', alt: 'Sunglass' },
+            { name: 'Trending Belt', image: './assets/images/belt.jpg', alt: 'Belt' }
         ]
     }
 ];
@@ -502,3 +538,26 @@ function goHome() {
 //         cartCount.textContent=count;
 //     });
 // });
+
+
+// newspaper segment.....
+
+// Function to show popup after 5 seconds
+// window.onload = function() {
+//     setTimeout(function() {
+//         document.getElementById("popupOverlay").style.display = "block";
+//         document.getElementById("popupContent").style.display = "block";
+//     }, 5000); // 5000ms = 5 seconds
+// };
+
+// // Close popup when 'x' is clicked
+document.getElementById("popupClose").onclick = function() {
+    document.getElementById("popupOverlay").style.display = "none";
+    document.getElementById("popupContent").style.display = "none";
+};
+
+// // Close popup when clicking outside of it
+document.getElementById("popupOverlay").onclick = function() {
+    document.getElementById("popupOverlay").style.display = "none";
+    document.getElementById("popupContent").style.display = "none";
+};
