@@ -20,7 +20,16 @@
                     <!-- <a id="blog" onclick="blogs()">Blog</a> -->
                     <a id="about" onclick="abouts()">About</a>
                     <a id="contact" onclick="contacts()">Contact</a>
-                    <i class="fa-sharp fa-solid fa-cart-shopping"></i>
+                    <span id="login-cart">
+                        <!-- <a href="#" id="login" onclick="openLoginModal()">Login</a> -->
+                        <!-- <a href="#" id="cart" style="display: none;">
+                            <img src="cart-icon.png" alt="Cart" width="24">
+                        </a> -->
+                        <a onclick="openLoginModal()" id="loginLink">Login</a>
+                        <a onclick="openSignupModal()" id="signupLink">Sign Up</a>
+                        <i class="fa-sharp fa-solid fa-cart-shopping" style="display:none" id="icon"></i>
+                    </span>
+                    <!-- <i class="fa-sharp fa-solid fa-cart-shopping"></i> -->
 
                 </li>
             </ul>
@@ -54,7 +63,10 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i> <br>
                         <button onclick="addCart()">Add to Cart</button>
-                        <button class="more-Info" onclick="moreInfo(this)" data-image="./assets/images/srt1.webp">more</button>
+                        <button class="more-Info" onclick="moreInfo(this)" data-image="./assets/images/srt1.webp"
+                         data-title="Cutton Trending Shirt's"
+                         data-description="A comfortable and stylish cotton shirt, perfect for any occasion."
+                        >more</button>
                     </div>
                 </div>
 
@@ -71,7 +83,10 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i> <br>
                         <button onclick="addCart()">Add to Cart</button>
-                        <button class="more-Info" onclick="moreInfo(this)" data-image="./assets/images/srt2.webp">more</button>
+                        <button class="more-Info" onclick="moreInfo(this)" data-image="./assets/images/srt2.webp"
+                        data-title="Cutton Trending Shirt's"
+                        data-description="It is cutton shirt of gray line appears fantasic...."
+                        >more</button>
                     </div>
                  </div>
 
@@ -85,7 +100,10 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-sharp-half-stroke"></i><br>
                         <button onclick="addCart()">Add to Cart</button>
-                        <button class="more-Info" onclick="moreInfo(this)" data-image="./assets/images/srt6.webp">more</button>
+                        <button class="more-Info" onclick="moreInfo(this)" data-image="./assets/images/srt6.webp"
+                         data-title="Cutton Trending Shirt's" 
+                         data-description="It is cutton shirt of white appears fantasic.... and gives spot in color"
+                        >more</button>
                     </div>
                  </div>
 
@@ -109,7 +127,10 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i> <br>
                         <button onclick="addCart()">Add to Cart</button>
-                        <button class="more-Info" onclick="moreInfo(this)" data-image="./assets/images/wn4.webp">more</button>
+                        <button class="more-Info" onclick="moreInfo(this)" data-image="./assets/images/wn4.webp"
+                          data-title="Trending Girl Top's"
+                          data-description="It is Girl tops of red in appearance with affordable price in good quality"
+                        >more</button>
                     </div>
                 </div>
 
@@ -124,7 +145,10 @@
                         <i class="fa-solid fa-star-sharp-half-stroke"></i>
                          <br>
                         <button onclick="addCart()">Add to Cart</button>
-                        <button onclick="moreInfo(this)" data-image="./assets/images/wn5.webp">more</button>
+                        <button onclick="moreInfo(this)" data-image="./assets/images/wn5.webp"
+                         data-title="Trending Girl Top's"
+                         data-description="It is Girl tops of blue in appearance with affordable price in good quality"
+                        >more</button>
                     </div>
                 </div>
 
@@ -138,7 +162,10 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i> <br>
                         <button onclick="addCart()">Add to Cart</button>
-                        <button onclick="moreInfo(this)" data-image="./assets/images/wn6.webp">more</button>
+                        <button onclick="moreInfo(this)" data-image="./assets/images/wn6.webp"
+                         data-title="Trending Girl Top's"
+                         data-description="It is Girl tops of black with white in appearance with affordable price in good quality"
+                        >more</button>
                     </div>
                 </div>
             </div>
@@ -225,6 +252,50 @@
 
             </div>
         </div>
+
+        <!-- Sign Up Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSignupModal()">&times;</span>
+            <h2>Create Account</h2>
+            <form onsubmit="signup(event)">
+                <label for="signupName">Name:</label>
+                <input type="text" id="signupName" placeholder="John Doe" required>
+
+                <br/>
+                <br/>
+                
+                <label for="signupEmail">Email:</label>
+                <input type="email" id="signupEmail" placeholder="you@example.com" required>
+                <br/><br/>
+                
+                <label for="signupPassword">Password:</label>
+                <input type="password" id="signupPassword" required>
+                <br/><br/>
+                
+                <button type="submit">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+     <!-- Login Modal -->
+     <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Login</h2>
+            <form onsubmit="login(event)">
+                <label for="loginEmail">Email:</label>
+                <input type="email" id="loginEmail" placeholder="you@example.com" required>
+                <br/><br/>
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" required>
+                <br/><br/>
+                <button type="submit">Login</button>
+            </form>
+            <p id="loginError" style="color: red; display: none;">Incorrect email or password</p>
+        </div>
+    </div>
+
 
         
         <!-- <div class="pop">
@@ -327,14 +398,17 @@
             <div>
                 <img src="" alt="" id="new-Img">
             </div>
-            <div class="popup-header">Trending shops</div>
+            <div class="popup-header"></div>
             <div class="popup-body">
-                Soft and breathable, this classic white cotton T-shirt is perfect for layering or wearing solo.
+                
             </div>
             <!-- <input type="text" class="popup-input" placeholder="First Name">
             <input type="email" class="popup-input" placeholder="Email Address">
             <button class="popup-button">Sign Up</button> -->
         </div>
+
+
+       
 
         
 

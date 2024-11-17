@@ -1,3 +1,5 @@
+let sectionIndex=0;
+// let index=-1;
 
 let card = document.querySelector(".trend");
 let card2 = document.getElementById("trendSec");
@@ -15,22 +17,53 @@ function homes(){
     mainPage.style.display="flex";
     card.style.display="block";
     card2.style.display="block";
+    contact.style.display='none'
     // blog.style.display="block";
     about.style.display="none";
+    letter.style.display='flex'
+    footer.style.display='flex'
+     sectionIndex=0;
+    document.getElementById("more-sections").innerHTML = ""; // Clear previous sections
+    document.getElementById("show-more").disabled = false; // 
+    document.getElementById("loginModal").style.display='none'
+    document.getElementById("signupModal").style.display='none'
 
     // time to iconing them..... 
 
     // document.getElementById("blog").style.color="black";
     // underline section should be aqu in color and rest are black just to gloify them......
+    
+  
     document.getElementById("home").style.color="rgb(2, 173, 173)";
     document.getElementById("shop").style.color="black";
     document.getElementById("contact").style.color="black";
     document.getElementById("about").style.color="black"
     document.getElementById("show-more").style.display="block"
-    document.getElementById("more-sections").style.display="none"
+    // document.getElementById("more-sections").style.display="none"
+    // if(showMore){
+    //     sectionIndex=0;
+    //     document.getElementById("more-sections").style.display="block"
+    // }
+    
     // document.getElementById("desc").style.display="none"
+    // index=0;
+    // sectionIndex=0;
+    // document.getElementById("more-sections").style.display="none"
 
 }
+
+// if(index===0){
+    // while(sectionIndex !== 0){
+    //     sectionsData[sectionIndex].style.display=none;
+    //     sectionIndex--;
+    // }
+    
+   
+
+    // sectionIndex=0;
+// }
+
+
 
 function shops(){
     mainPage.style.display="none";
@@ -38,7 +71,8 @@ function shops(){
     card2.style.display="block";
     // blog.style.display="none";
     // blog.style.display="none"
-
+    
+    
     // document.getElementById("blog").style.color="black";
     document.getElementById("home").style.color="black";
     document.getElementById("shop").style.color="rgb(2, 173, 173)";
@@ -46,6 +80,9 @@ function shops(){
     document.getElementById("about").style.color="black"
     document.getElementById("show-more").style.display="block"
     document.getElementById("more-sections").style.display="block"
+    document.getElementById("loginModal").style.display='none'
+    document.getElementById("signupModal").style.display='none'
+    
 }
 
 // function blogs(){
@@ -76,6 +113,8 @@ function abouts(){
     document.getElementById("about").style.color="rgb(2, 173, 173)"
     document.getElementById("show-more").style.display="none"
     document.getElementById("more-sections").style.display="none"
+    document.getElementById("loginModal").style.display='none'
+    document.getElementById("signupModal").style.display='none'
 }
 
 function contacts(){
@@ -94,6 +133,9 @@ function contacts(){
     document.getElementById("contact").style.color="rgb(2, 173, 173)"
     document.getElementById("show-more").style.display="none"
     document.getElementById("more-sections").style.display="none"
+
+    document.getElementById("loginModal").style.display='none'
+    document.getElementById("signupModal").style.display='none'
 }
 // cart ki baari hai ab....
 
@@ -169,9 +211,20 @@ function moreInfo(button){
     
     const imageUrl=button.getAttribute("data-image");
     const popImage=document.getElementById("new-Img");
+    const title=button.getAttribute("data-title");
+    const description=button.getAttribute("data-description");
+    const popheader=document.querySelector('.popup-header')
+    const pop_docu=document.querySelector('.popup-body')
+    popheader.textContent=title;
+    pop_docu.textContent=description;
+    
+    // title.style.color='aqua'
+    popheader.style.color='red'
+    pop_docu.style.color='blue'
     popImage.style.width="150px"
     popImage.style.height="150px"
     popImage.style.objectFit="cover"
+    popImage.style.marginLeft='60px'
     popImage.src=imageUrl;
     document.getElementById("popupOverlay").style.display = "block";
     document.getElementById("popupContent").style.display = "block";
@@ -219,7 +272,9 @@ document.getElementById("popup_Close").onclick = function() {
     // card.style.display="block";
     // card2.style.display="block";
     // document.getElementById('show-more').style.display='block';
-    window.location.href = "prac.html";
+    // window.location.href = "prac.html";
+    document.getElementById('carto').style.display='none'
+    homes();
 
 };
 
@@ -401,7 +456,7 @@ const mainContainer = document.getElementById("more-sections");
 function createProductSection(titleText, products) {
     const section = document.createElement('div');
     section.className = 'trend';
-
+    section.id='hello'
     const headDiv = document.createElement('div');
     headDiv.className = 'head';
 
@@ -450,6 +505,8 @@ function createProductSection(titleText, products) {
         moreInfoButton.onclick = function(){moreInfo(this);};
         // killer approach....
         moreInfoButton.setAttribute('data-image', img.src);
+        moreInfoButton.setAttribute('data-title',product.name);
+        moreInfoButton.setAttribute('data-description',product.descr);
 
         moreInfoButton.textContent = 'more';
         crdTextDiv.appendChild(moreInfoButton);
@@ -467,25 +524,45 @@ const sectionsData = [
     {
         title: 'Foot Wear',
         products: [
-            { name: 'Trending Slipper', image: './assets/images/slipper.jpg', alt: 'Slipper' },
-            { name: 'Trending Shoes', image: './assets/images/shoes.jpg', alt: 'Shoes' },
-            { name: 'Trending Crocks', image: './assets/images/crocks.jpg', alt: 'Crocks' }
+            { name: 'Trending Slipper', image: './assets/images/slipper.jpg', alt: 'Slipper',
+                descr:'A slipper is a comfortable, lightweight footwear designed for indoor use. Typically made from soft materials like fabric or foam'
+             },
+            { name: 'Trending Shoes', image: './assets/images/shoes.jpg', alt: 'Shoes',
+                descr:'A shoes is a comfortable, lightweight footwear designed for indoor use. Typically made from soft materials like fabric or foam'
+             },
+            { name: 'Trending Crocks', image: './assets/images/crocks.jpg', alt: 'Crocks',
+                descr:'A slipper is a comfortable, lightweight footwear designed for indoor use. Typically made from soft materials like fabric or foam'
+             }
         ]
+        
+
     },
     {
         title: 'Bags',
         products: [
-            { name: 'Trending Backpacks', image: './assets/images/bagpack.jpg', alt: 'Backpack' },
-            { name: 'Trending Handbags', image: './assets/images/handbag.jpg', alt: 'Handbag' },
-            { name: 'Trending Travel-bags', image: './assets/images/travelling_bag.jpg', alt: 'Travel Bag' }
+            { name: 'Trending Backpacks', image: './assets/images/bagpack.jpg', alt: 'Backpack' ,
+                descr:'Backpacks are versatile, portable bags designed to be worn on the back with two shoulder straps.'
+            },
+            { name: 'Trending Handbags', image: './assets/images/handbag.jpg', alt: 'Handbag',
+                descr:'A handbag is a stylish, portable accessory designed for carrying personal items such as wallets, makeup, and keys.'
+             },
+            { name: 'Trending Travel-bags', image: './assets/images/travelling_bag.jpg', alt: 'Travel Bag' ,
+                 descr:'A traveling bag is a durable, spacious luggage designed for long-distance travel. It typically features compartments for organizing clothes'
+            }
         ]
     },
     {
         title: 'Accessories',
         products: [
-            { name: 'Trending Watches', image: './assets/images/watch.jpg', alt: 'Watch' },
-            { name: 'Trending Sun-glass', image: './assets/images/sunglass.jpg', alt: 'Sunglass' },
-            { name: 'Trending Belt', image: './assets/images/belt.jpg', alt: 'Belt' }
+            { name: 'Trending Watches', image: './assets/images/watch.jpg', alt: 'Watch',
+                descr:'A watch is a timekeeping device worn on the wrist, typically consisting of a dial, hands, and a strap.'
+            },
+            { name: 'Trending Sun-glass', image: './assets/images/sunglass.jpg', alt: 'Sunglass' ,
+                descr:'Sunglasses are protective eyewear designed to shield the eyes from harmful UV rays and glare. '
+            },
+            { name: 'Trending Belt', image: './assets/images/belt.jpg', alt: 'Belt',
+                descr:'A belt is a flexible band, typically made of leather or fabric, worn around the waist to secure clothing or as a fashion accessory.'
+             }
         ]
     }
 ];
@@ -496,10 +573,13 @@ const sectionsData = [
 // });
 
 
-let sectionIndex=0;
+
+
+
 function showMore(){
     if(sectionIndex<sectionsData.length){
         const sectionData=sectionsData[sectionIndex];
+        // sectionData.style.display='block'
         createProductSection(sectionData.title, sectionData.products);
         sectionIndex++;
     }
@@ -509,6 +589,7 @@ function showMore(){
         document.getElementById("go-home").style.display = "block";
     }
 }
+
 
 
 // function showMore() {
@@ -524,31 +605,17 @@ function showMore(){
 // }
 
 function goHome() {
-    // Logic to go back to the homepage. we can redirect or refresh based on our use case.
-    window.location.href = "prac.html"; // Assuming 'index.html' is homepage
+    
+    document.getElementById("go-home").style.display='none'
+    homes();
+
+
 }
 
-// Add to cart.....
-// document.addEventListener('DOMContentLoaded',function(){
-//     let count=0;
-//     const cartCount=document.getElementById('cartCount');
-//     const addToCart=document.querySelector('.hello');
-//     addToCart.addEventListener('click',function(){
-//         count++;
-//         cartCount.textContent=count;
-//     });
-// });
 
 
-// newspaper segment.....
 
-// Function to show popup after 5 seconds
-// window.onload = function() {
-//     setTimeout(function() {
-//         document.getElementById("popupOverlay").style.display = "block";
-//         document.getElementById("popupContent").style.display = "block";
-//     }, 5000); // 5000ms = 5 seconds
-// };
+
 
 // // Close popup when 'x' is clicked
 document.getElementById("popupClose").onclick = function() {
@@ -557,7 +624,86 @@ document.getElementById("popupClose").onclick = function() {
 };
 
 // // Close popup when clicking outside of it
-document.getElementById("popupOverlay").onclick = function() {
-    document.getElementById("popupOverlay").style.display = "none";
-    document.getElementById("popupContent").style.display = "none";
-};
+// document.getElementById("popupOverlay").onclick = function() {
+//     document.getElementById("popupOverlay").style.display = "none";
+//     document.getElementById("popupContent").style.display = "none";
+// };
+
+// playing with signup and signin modal......
+ 
+function openSignupModal() {
+    document.getElementById('signupModal').style.display = 'flex';
+    letter.style.display='none'
+    footer.style.display='none'
+    contact.style.display='none'
+    about.style.display='none'
+    mainPage.style.display='none'
+    card.style.display='none'
+    card2.style.display='none'
+    document.getElementById("show-more").style.display="none"
+    document.getElementById('loginModal').style.display='none'
+}
+
+function closeSignupModal() {
+    document.getElementById('signupModal').style.display = 'none';
+    homes();
+    
+}
+
+function openLoginModal() {
+    document.getElementById('loginModal').style.display = 'flex';
+    letter.style.display='none'
+    footer.style.display='none'
+    contact.style.display='none'
+    about.style.display='none'
+    mainPage.style.display='none'
+    card.style.display='none'
+    card2.style.display='none'
+    document.getElementById("show-more").style.display="none"
+    document.getElementById('signupModal').style.display='none'
+}
+
+function closeLoginModal() {
+    document.getElementById('loginModal').style.display = 'none';
+    homes();
+}
+
+function signup(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById('signupName').value;
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPassword').value;
+
+    // Store signup details in local storage (for demo purposes only)
+    // These lines store the user's input values (email, password, and name) into the browser's local storage. localStorage.setItem() saves the data as key-value pairs:
+    localStorage.setItem('userEmail', email);
+    localStorage.setItem('userPassword', password);
+    localStorage.setItem('userName', name);
+    
+    alert("Account created successfully! You can now login.");
+    document.getElementById('signupLink').style.display = 'none';
+    closeSignupModal();
+}
+
+function login(event) {
+    event.preventDefault();
+    
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    
+    // Retrieve stored credentials
+    const storedEmail = localStorage.getItem('userEmail');
+    const storedPassword = localStorage.getItem('userPassword');
+    
+    if (email === storedEmail && password === storedPassword) {
+        // Hide login and signup links, show cart icon
+        document.getElementById('loginLink').style.display = 'none';
+        document.getElementById('signupLink').style.display = 'none';
+        document.getElementById('icon').style.display = 'inline';
+        closeLoginModal();
+    } else {
+        // Show error message
+        document.getElementById('loginError').style.display = 'block';
+    }
+}
