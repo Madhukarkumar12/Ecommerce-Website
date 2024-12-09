@@ -153,10 +153,11 @@ function show(img){
 }
 
 
-function addCart(){
-    alert("Added To Cart");
-    location.reload()
-}
+// function addCart(id,img,name,price){
+    // alert("Added To Cart");
+    // location.reload()
+
+// }
 
 
 function moreInfo(button){
@@ -261,10 +262,16 @@ function createProductSection(titleText, products) {
         halfStarIcon.className = 'fa-solid fa-star-half-stroke';
         crdTextDiv.appendChild(halfStarIcon);
         crdTextDiv.appendChild(document.createElement('br'));
-
+        
+      
+        
         const addToCartButton = document.createElement('button');
-        addToCartButton.onclick = addCart;
+        // addToCartButton.onclick = addCart;
+        const price=product.price;
+        const id=product.id;
+        const name=product.name;
         addToCartButton.textContent = 'Add to Cart';
+        addToCartButton.onclick=function(){addCart(id,name,price,product.image)}
         crdTextDiv.appendChild(addToCartButton);
 
         const moreInfoButton = document.createElement('button');
@@ -292,13 +299,16 @@ const sectionsData = [
         title: 'Foot Wear',
         products: [
             { name: 'Trending Slipper', image: './assets/images/slipper.jpg', alt: 'Slipper',
-                descr:'A slipper is a comfortable, lightweight footwear designed for indoor use. Typically made from soft materials like fabric or foam'
+                descr:'A slipper is a comfortable, lightweight footwear designed for indoor use. Typically made from soft materials like fabric or foam',
+                price:'20',id:7
              },
             { name: 'Trending Shoes', image: './assets/images/shoes.jpg', alt: 'Shoes',
-                descr:'A shoes is a comfortable, lightweight footwear designed for indoor use. Typically made from soft materials like fabric or foam'
+                descr:'A shoes is a comfortable, lightweight footwear designed for indoor use. Typically made from soft materials like fabric or foam',
+                price:'30',id:8
              },
             { name: 'Trending Crocks', image: './assets/images/crocks.jpg', alt: 'Crocks',
-                descr:'A slipper is a comfortable, lightweight footwear designed for indoor use. Typically made from soft materials like fabric or foam'
+                descr:'A slipper is a comfortable, lightweight footwear designed for indoor use. Typically made from soft materials like fabric or foam',
+                price:'25',id:9
              }
         ]
         
@@ -308,13 +318,16 @@ const sectionsData = [
         title: 'Bags',
         products: [
             { name: 'Trending Backpacks', image: './assets/images/bagpack.jpg', alt: 'Backpack' ,
-                descr:'Backpacks are versatile, portable bags designed to be worn on the back with two shoulder straps.'
+                descr:'Backpacks are versatile, portable bags designed to be worn on the back with two shoulder straps.',
+                price:'40',id:10
             },
             { name: 'Trending Handbags', image: './assets/images/handbag.jpg', alt: 'Handbag',
-                descr:'A handbag is a stylish, portable accessory designed for carrying personal items such as wallets, makeup, and keys.'
+                descr:'A handbag is a stylish, portable accessory designed for carrying personal items such as wallets, makeup, and keys.',
+                price:'32',id:11
              },
             { name: 'Trending Travel-bags', image: './assets/images/travelling_bag.jpg', alt: 'Travel Bag' ,
-                 descr:'A traveling bag is a durable, spacious luggage designed for long-distance travel. It typically features compartments for organizing clothes'
+                 descr:'A traveling bag is a durable, spacious luggage designed for long-distance travel. It typically features compartments for organizing clothes',
+                 price:'50',id:12
             }
         ]
     },
@@ -322,13 +335,16 @@ const sectionsData = [
         title: 'Accessories',
         products: [
             { name: 'Trending Watches', image: './assets/images/watch.jpg', alt: 'Watch',
-                descr:'A watch is a timekeeping device worn on the wrist, typically consisting of a dial, hands, and a strap.'
+                descr:'A watch is a timekeeping device worn on the wrist, typically consisting of a dial, hands, and a strap.',
+                price:'80',id:13
             },
             { name: 'Trending Sun-glass', image: './assets/images/sunglass.jpg', alt: 'Sunglass' ,
-                descr:'Sunglasses are protective eyewear designed to shield the eyes from harmful UV rays and glare. '
+                descr:'Sunglasses are protective eyewear designed to shield the eyes from harmful UV rays and glare. ',
+                price:'60',id:14
             },
             { name: 'Trending Belt', image: './assets/images/belt.jpg', alt: 'Belt',
-                descr:'A belt is a flexible band, typically made of leather or fabric, worn around the waist to secure clothing or as a fashion accessory.'
+                descr:'A belt is a flexible band, typically made of leather or fabric, worn around the waist to secure clothing or as a fashion accessory.',
+                price:'70',id:15
              }
         ]
     }
@@ -454,6 +470,8 @@ function login(event) {
     const storedPassword = localStorage.getItem('userPassword');
     
     if (email === storedEmail && password === storedPassword) {
+
+        localStorage.setItem('isLoggedIn', 'true');
         // Hide login and signup links, show cart icon
         document.getElementById('loginLink').style.display = 'none';
         document.getElementById('signupLink').style.display = 'none';
@@ -464,3 +482,140 @@ function login(event) {
         document.getElementById('loginError').style.display = 'block';
     }
 }
+
+// Function to check login status on page load
+function checkLoginStatus() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    
+    if (isLoggedIn === 'true') {
+        // Hide login and signup links, show cart icon
+        document.getElementById('loginLink').style.display = 'none';
+        document.getElementById('signupLink').style.display = 'none';
+        document.getElementById('icon').style.display = 'inline';
+    } else {
+        // Show login and signup links, hide cart icon
+        document.getElementById('loginLink').style.display = 'inline';
+        document.getElementById('signupLink').style.display = 'inline';
+        document.getElementById('icon').style.display = 'none';
+    }
+}
+
+// Call checkLoginStatus on page load
+checkLoginStatus();
+
+
+
+// add to cart ki baari...
+let cart = [];
+
+function loadCart(){
+    const storedCart=localStorage.getItem("cart");
+    if(storedCart){
+        cart=JSON.parse(storedCart);
+        updateCartCount();
+    }
+}
+
+function saveCart(){
+    localStorage.setItem("cart",JSON.stringify(cart));
+}
+
+
+function addCart(id, name, price,image) {
+  const itemIndex = cart.findIndex(item => item.id === id);
+  if (itemIndex >= 0) {
+    cart[itemIndex].quantity += 1;
+  } else {
+    cart.push({ id, name, price, quantity: 1,image });
+  }
+  saveCart();
+  updateCartCount();
+}
+
+function updateCartCount() {
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  document.getElementById("cart-count").textContent = totalItems;
+}
+
+function openCart() {
+  const cartModal = document.getElementById("cart-modal");
+
+  const cartItemsContainer = document.getElementById("cart-items");
+ 
+  const totalAmountElement = document.getElementById("total-amount");
+
+  cartItemsContainer.innerHTML = "";
+
+  let totalAmount = 0;
+
+  cart.forEach(item => {
+    totalAmount += item.price * item.quantity;
+
+    const cartItem = document.createElement("div");
+    cartItem.innerHTML = `
+    
+<div style="display: flex; align-items: center; gap: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9; width: 300px;">
+  <img src="${item.image}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
+
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 5px;">
+    <p style="margin: 0; font-weight: bold; font-size: 14px; color: #333;">${item.name}</p>
+    <p style="margin: 0; font-size: 12px; color: #666;">Price: $${item.price}</p>
+  </div>
+
+  <div style="display: flex; align-items: center; gap: 5px;">
+    <button onclick="updateQuantity(${item.id}, -1)" style="padding: 5px 10px; border: none; background-color: #ff4d4d; color: white; border-radius: 5px; cursor: pointer; font-size: 12px;">-</button>
+    <span style="min-width: 20px; text-align: center; font-size: 14px;">${item.quantity}</span>
+    <button onclick="updateQuantity(${item.id}, 1)" style="padding: 5px 10px; border: none; background-color: #4caf50; color: white; border-radius: 5px; cursor: pointer; font-size: 12px;">+</button>
+  </div>
+</div>
+
+    `;
+    cartItemsContainer.appendChild(cartItem);
+    
+  });
+
+  totalAmountElement.textContent = `Total: ${totalAmount.toFixed(2)}`;
+//   cartModal.classList.remove("hidden");
+  cartModal.style.display="block";
+//   cartModal.style.display="block"
+const sections = [mainPage, card, card2, contact, about, letter, footer];
+sections.forEach(section => {
+  if (section) section.style.display = "none";
+});
+
+document.getElementById("show-more").style.display = "none";
+document.getElementById("more-sections").style.display = "none";
+ 
+}
+
+
+
+function closeCart() {
+  const cartModal = document.getElementById("cart-modal");
+
+  cartModal.style.display='none';
+//   cartModal.classList.add("hidden");
+  homes();
+}
+
+function updateQuantity(id, change) {
+  const itemIndex = cart.findIndex(item => item.id === id);
+  if (itemIndex >= 0) {
+    cart[itemIndex].quantity += change;
+
+    if (cart[itemIndex].quantity <= 0) {
+      cart.splice(itemIndex, 1);
+    }
+
+    saveCart();
+    updateCartCount();
+    openCart();
+  }
+}
+
+window.onload=loadCart;
+
+
+  
+    
+
