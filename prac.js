@@ -39,29 +39,11 @@ function homes(){
     document.getElementById("contact").style.color="black";
     document.getElementById("about").style.color="black"
     document.getElementById("show-more").style.display="block"
-    // document.getElementById("more-sections").style.display="none"
-    // if(showMore){
-    //     sectionIndex=0;
-    //     document.getElementById("more-sections").style.display="block"
-    // }
     
-    // document.getElementById("desc").style.display="none"
-    // index=0;
-    // sectionIndex=0;
-    // document.getElementById("more-sections").style.display="none"
 
 }
 
-// if(index===0){
-    // while(sectionIndex !== 0){
-    //     sectionsData[sectionIndex].style.display=none;
-    //     sectionIndex--;
-    // }
-    
-   
 
-    // sectionIndex=0;
-// }
 
 
 
@@ -153,11 +135,6 @@ function show(img){
 }
 
 
-// function addCart(id,img,name,price){
-    // alert("Added To Cart");
-    // location.reload()
-
-// }
 
 
 function moreInfo(button){
@@ -441,78 +418,217 @@ function closeLoginModal() {
     homes();
 }
 
+
+// storage playing.....
+// let database={
+//     users:{},
+// }
+
+let currentUser=null;
 function signup(event) {
     event.preventDefault();
     
-    const name = document.getElementById('signupName').value;
-    const email = document.getElementById('signupEmail').value;
-    const password = document.getElementById('signupPassword').value;
+    const name = document.getElementById('signupName').value.trim();
+    const email = document.getElementById('signupEmail').value.trim();
+    const password = document.getElementById('signupPassword').value.trim();
+
+    if(!name || !email || !password){
+        alert("All Fields are required");
+        return;
+    }
+
+    // server side....
+    fetch('/signup',{
+        method:'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
+    })
+    .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Account created successfully! You can now log in.");
+                closeSignupModal();
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
 
     // Store signup details in local storage (for demo purposes only)
     // These lines store the user's input values (email, password, and name) into the browser's local storage. localStorage.setItem() saves the data as key-value pairs:
-    localStorage.setItem('userEmail', email);
-    localStorage.setItem('userPassword', password);
-    localStorage.setItem('userName', name);
+    // localStorage.setItem('userEmail', email);
+    // localStorage.setItem('userPassword', password);
+    // localStorage.setItem('userName', name);
+
     
-    alert("Account created successfully! You can now login.");
-    document.getElementById('signupLink').style.display = 'none';
-    closeSignupModal();
+
+    // if(database.users[email]){
+    //     alert("This email is already registered. Please log in.");
+    //     return;
+    // }
+
+    // database.users[email]={
+    //     name:name,
+    //     password:password,
+    //     cart:[]
+    // }
+    
+    // alert("Account created successfully! You can now login.");
+    // document.getElementById('signupLink').style.display = 'none';
+    // closeSignupModal();
 }
 
 function login(event) {
     event.preventDefault();
     
-    const email = document.getElementById('loginEmail').value;
-    const password = document.getElementById('loginPassword').value;
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
     
     // Retrieve stored credentials
-    const storedEmail = localStorage.getItem('userEmail');
-    const storedPassword = localStorage.getItem('userPassword');
+    // const storedEmail = localStorage.getItem('userEmail');
+    // const storedPassword = localStorage.getItem('userPassword');
     
-    if (email === storedEmail && password === storedPassword) {
+    // if (email === storedEmail && password === storedPassword) {
 
-        localStorage.setItem('isLoggedIn', 'true');
-        // Hide login and signup links, show cart icon
-        document.getElementById('loginLink').style.display = 'none';
-        document.getElementById('signupLink').style.display = 'none';
-        document.getElementById('icon').style.display = 'inline';
-        closeLoginModal();
-    } else {
-        // Show error message
-        document.getElementById('loginError').style.display = 'block';
+    //     localStorage.setItem('isLoggedIn', 'true');
+    //     // Hide login and signup links, show cart icon
+    //     document.getElementById('loginLink').style.display = 'none';
+    //     document.getElementById('signupLink').style.display = 'none';
+    //     document.getElementById('icon').style.display = 'inline';
+    //     closeLoginModal();
+    // } else {
+    //     // Show error message
+    //     document.getElementById('loginError').style.display = 'block';
+        
+    // }
+    //    Playing with own database.....
+    // if(database.users[email] && database.users[email].password === password){
+    //     currentUser=email;
+    //     alert(`Welcome ${database.users[email].name}`);
+    //     document.getElementById('loginLink').style.display = 'none';
+    //     document.getElementById('signupLink').style.display = 'none';
+    //     document.getElementById('icon').style.display = 'inline';
+    //     closeLoginModal();
+
+    // }
+    // else{
+    //     document.getElementById('loginError').style.display = 'block';
+    // }
+
+    if (!email || !password) {
+        alert("All fields are required!");
+        return;
     }
+    // Send login data to the server
+    fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                currentUser = data.user; // Save logged-in user info
+
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                alert(`Welcome, ${data.user.name}!`);
+                document.getElementById('loginLink').style.display = 'none';
+                document.getElementById('signupLink').style.display = 'none';
+                document.getElementById('icon').style.display = 'inline';
+                closeLoginModal();
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
 }
 
 // Function to check login status on page load
 function checkLoginStatus() {
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    // const isLoggedIn = localStorage.getItem('isLoggedIn');
     
-    if (isLoggedIn === 'true') {
-        // Hide login and signup links, show cart icon
+    // if (isLoggedIn === 'true') {
+    //     // Hide login and signup links, show cart icon
+    //     document.getElementById('loginLink').style.display = 'none';
+    //     document.getElementById('signupLink').style.display = 'none';
+    //     document.getElementById('icon').style.display = 'inline';
+    // } else {
+    //     // Show login and signup links, hide cart icon
+    //     document.getElementById('loginLink').style.display = 'inline';
+    //     document.getElementById('signupLink').style.display = 'inline';
+    //     document.getElementById('icon').style.display = 'none';
+    // }
+
+    // if(database.users[currentUser]){
+         // Hide login and signup links, show cart icon
+        // document.getElementById('loginLink').style.display = 'none';
+        // document.getElementById('signupLink').style.display = 'none';
+        // document.getElementById('icon').style.display = 'inline';
+    // }
+    // else{
+    //     document.getElementById('loginLink').style.display = 'inline';
+    //     document.getElementById('signupLink').style.display = 'inline';
+    //     document.getElementById('icon').style.display = 'none';
+    // }
+
+    const storedUser = localStorage.getItem('currentUser');
+
+    if (storedUser) {
+        currentUser = JSON.parse(storedUser);
+
         document.getElementById('loginLink').style.display = 'none';
         document.getElementById('signupLink').style.display = 'none';
         document.getElementById('icon').style.display = 'inline';
+        // document.getElementById('logoutButton').style.display = 'inline';
+
+        // alert(`Welcome back, ${currentUser.name}!`);
     } else {
-        // Show login and signup links, hide cart icon
         document.getElementById('loginLink').style.display = 'inline';
         document.getElementById('signupLink').style.display = 'inline';
         document.getElementById('icon').style.display = 'none';
+        // document.getElementById('logoutButton').style.display = 'none';
     }
 }
 
 // Call checkLoginStatus on page load
 checkLoginStatus();
 
-
+function isLoggedIn() {
+    
+    // return !!localStorage.getItem('isLoggedIn'); 
+    // return !!currentUser;
+    return !!localStorage.getItem('currentUser')
+  }
 
 // add to cart ki baari...
 let cart = [];
 
-function loadCart(){
-    const storedCart=localStorage.getItem("cart");
-    if(storedCart){
-        cart=JSON.parse(storedCart);
-        updateCartCount();
+// function loadCart(){
+//     const storedCart=localStorage.getItem("cart");
+//     if(storedCart){
+//         cart=JSON.parse(storedCart);
+//         updateCartCount();
+//     }
+// }
+
+function loadCart() {
+    const storedUser = JSON.parse(localStorage.getItem("currentUser"));
+
+    if (storedUser) {
+        fetch('/load-cart', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: storedUser.email }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    cart = data.cart || [];
+                    saveCart();
+                    updateCartCount();
+                }
+            })
+            .catch(error => console.error('Error loading cart:', error));
     }
 }
 
@@ -522,6 +638,12 @@ function saveCart(){
 
 
 function addCart(id, name, price,image) {
+
+    if(! isLoggedIn()){
+        alert("Please Login to add to cart");
+        return;
+    }
+
   const itemIndex = cart.findIndex(item => item.id === id);
   if (itemIndex >= 0) {
     cart[itemIndex].quantity += 1;
@@ -529,6 +651,17 @@ function addCart(id, name, price,image) {
     cart.push({ id, name, price, quantity: 1,image });
   }
   saveCart();
+
+   // Save the cart to the backend....
+   const storedUser = JSON.parse(localStorage.getItem("currentUser"));
+   if (storedUser) {
+       fetch('/save-cart', {
+           method: 'POST',
+           headers: { 'Content-Type': 'application/json' },
+           body: JSON.stringify({ email: storedUser.email, cart }),
+       }).catch(error => console.error('Error saving cart:', error));
+   }
+
   updateCartCount();
 }
 
