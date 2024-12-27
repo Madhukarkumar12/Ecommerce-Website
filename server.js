@@ -10,6 +10,11 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname));
 
+// Redirect root (/) to /prac.html
+app.get('/', (req, res) => {
+    res.redirect('/prac.html');
+});
+
 const DATABASE_FILE = 'users.json';
 
 // Load database or initialize empty structure
