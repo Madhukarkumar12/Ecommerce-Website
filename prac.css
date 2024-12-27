@@ -44,6 +44,77 @@ ul li i:hover{
     color: gray;
     cursor: pointer;
 }
+/* #login-cart {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+} */
+
+#loginLink, #signupLink, #logout {
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#loginLink {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+#signupLink {
+    background-color: #2196F3; /* Blue */
+    color: white;
+}
+
+#logout {
+    background-color: #f44336; /* Red */
+    color: white;
+}
+
+#icon {
+    position: relative;
+    font-size: 24px;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#icon:hover {
+    color: #000;
+}
+
+#cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #f44336; /* Red */
+    color: white;
+    font-size: 12px;
+    border-radius: 50%;
+    padding: 3px 6px;
+    font-weight: bold;
+}
+
+#loginLink:hover, #signupLink:hover, #logout:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+#logout {
+    display: none; /* Initially hidden */
+    padding: 10px 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#logout:hover {
+    background-color: #c62828; /* Darker Red */
+}
+
 .main{
     display: flex;
     justify-content: space-around;

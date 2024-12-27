@@ -27,6 +27,7 @@ function homes(){
     document.getElementById("show-more").disabled = false; // 
     document.getElementById("loginModal").style.display='none'
     document.getElementById("signupModal").style.display='none'
+    document.getElementById("cart-modal").style.display='none'
 
     // time to iconing them..... 
 
@@ -579,14 +580,14 @@ function checkLoginStatus() {
         document.getElementById('loginLink').style.display = 'none';
         document.getElementById('signupLink').style.display = 'none';
         document.getElementById('icon').style.display = 'inline';
-        // document.getElementById('logoutButton').style.display = 'inline';
+        document.getElementById('logout').style.display = 'inline';
 
         // alert(`Welcome back, ${currentUser.name}!`);
     } else {
         document.getElementById('loginLink').style.display = 'inline';
         document.getElementById('signupLink').style.display = 'inline';
         document.getElementById('icon').style.display = 'none';
-        // document.getElementById('logoutButton').style.display = 'none';
+        document.getElementById('logout').style.display = 'none';
     }
 }
 
@@ -597,10 +598,22 @@ function isLoggedIn() {
     
     // return !!localStorage.getItem('isLoggedIn'); 
     // return !!currentUser;
-    return !!localStorage.getItem('currentUser')
+    return !!localStorage.getItem('currentUser');
   }
 
 // add to cart ki baari...
+
+// logout time....
+document.getElementById("logout").addEventListener('click',()=>{
+    localStorage.removeItem("currentUser");
+    
+    document.getElementById('loginLink').style.display = 'inline';
+    document.getElementById('signupLink').style.display = 'inline';
+    document.getElementById('icon').style.display = 'none';
+    document.getElementById('logout').style.display = 'none';
+
+    alert('You have successfully logged out!');
+})
 let cart = [];
 
 // function loadCart(){
