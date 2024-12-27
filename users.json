@@ -63,7 +63,7 @@
           "id": 2,
           "name": "Cutton Trending Shirt's",
           "price": 20,
-          "quantity": 1,
+          "quantity": 2,
           "image": "./assets/images/srt2.webp"
         },
         {
@@ -72,29 +72,13 @@
           "price": 20,
           "quantity": 1,
           "image": "./assets/images/srt6.webp"
-        },
-        {
-          "id": 4,
-          "name": "Trending Girl Top's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/wn4.webp"
-        },
-        {
-          "id": 5,
-          "name": "Trending Girl Top's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/wn5.webp"
-        },
-        {
-          "id": 6,
-          "name": "Trending Girl Top's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/wn6.webp"
         }
       ]
+    },
+    "ankit@gmail.com": {
+      "name": "ankit",
+      "password": "hii",
+      "cart": []
     }
   }
 }
