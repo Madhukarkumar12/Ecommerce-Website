@@ -449,6 +449,8 @@ function signup(event) {
             if (data.success) {
                 alert("Account created successfully! You can now log in.");
                 closeSignupModal();
+                // Load the cart for the new user
+                loadCart(); // Load the cart after signup
             } else {
                 alert(data.message);
             }
@@ -475,7 +477,7 @@ function signup(event) {
     // }
     
     // alert("Account created successfully! You can now login.");
-    // document.getElementById('signupLink').style.display = 'none';
+    document.getElementById('signupLink').style.display = 'none';
     // closeSignupModal();
 }
 
@@ -533,9 +535,12 @@ function login(event) {
 
                 localStorage.setItem('currentUser', JSON.stringify(currentUser));
                 alert(`Welcome, ${data.user.name}!`);
+                updateCartCount();
+                loadCart();
                 document.getElementById('loginLink').style.display = 'none';
                 document.getElementById('signupLink').style.display = 'none';
                 document.getElementById('icon').style.display = 'inline';
+                document.getElementById('logout').style.display='inline';
                 closeLoginModal();
             } else {
                 alert(data.message);
@@ -603,18 +608,28 @@ function isLoggedIn() {
 
 // add to cart ki baari...
 
+let cart = [];
+
 // logout time....
 document.getElementById("logout").addEventListener('click',()=>{
     localStorage.removeItem("currentUser");
+    // cart = [];
+    // saveCart();
+    // updateCartCount();
+    // loadCart()
     
     document.getElementById('loginLink').style.display = 'inline';
     document.getElementById('signupLink').style.display = 'inline';
     document.getElementById('icon').style.display = 'none';
     document.getElementById('logout').style.display = 'none';
-
+    
+    // window.location.reload();
+    // window.onload=loadCart;
     alert('You have successfully logged out!');
+    
+    // window.onload=loadCart;
 })
-let cart = [];
+
 
 // function loadCart(){
 //     const storedCart=localStorage.getItem("cart");
@@ -642,6 +657,11 @@ function loadCart() {
                 }
             })
             .catch(error => console.error('Error loading cart:', error));
+    }else{
+        // If no user is logged in, clear the cart
+        cart = [];
+        saveCart();
+        updateCartCount();
     }
 }
 
