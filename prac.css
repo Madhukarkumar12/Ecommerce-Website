@@ -481,90 +481,144 @@ ul li i:hover{
     position: fixed;
 }
 
-/* .container {
+/* /* .container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh; /* Full viewport height */
     /* text-align: center; Center text inside */
-/* } */ 
+/* } */  */
 
    /* Popup background overlay */
-   .popup-overlay {
+  /* Popup Overlay */
+.popup-overlay {
     display: none;
     position: fixed;
     top: 0;
     left: 0;
-    width: 150%;
-    height: 150%;
-    background: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8); /* Darker background for better contrast */
     z-index: 10;
+    backdrop-filter: blur(5px); /* Frosted glass effect */
+    transition: opacity 0.3s ease-in-out; /* Smooth fade-in effect */
+    opacity: 0; /* Start hidden */
 }
 
-   /* Popup content box */
-   .popup-content {
+/* Display popup overlay when active */
+.popup-overlay.show {
+    display: block;
+    opacity: 1;
+}
+
+/* Popup Content Box */
+.popup-content {
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-    width: 300px;
+    background: linear-gradient(135deg, #ffffff, #f9f9f9); /* Subtle gradient */
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3); /* Larger shadow for depth */
+    width: 350px;
+    max-width: 90%; /* Responsive for smaller screens */
     z-index: 11;
+    animation: popup-show 0.4s ease-out; /* Smooth entry animation */
 }
 
-/* Close button */
+/* Display popup content when active */
+.popup-content.show {
+    display: block;
+}
+
+/* Entry Animation */
+@keyframes popup-show {
+    from {
+        transform: translate(-50%, -60%) scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Close Button */
 .popup-close {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 18px;
+    top: 15px;
+    right: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #999;
     cursor: pointer;
+    transition: color 0.3s ease;
 }
 
-/* Popup header */
+.popup-close:hover {
+    color: #333; /* Darker color on hover */
+}
+
+/* Popup Header */
 .popup-header {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     color: #333;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
 }
 
- /* Popup body */
- .popup-body {
-    font-size: 14px;
-    color: #666;
+/* Popup Body */
+.popup-body {
+    font-size: 16px;
+    color: #555;
     margin-bottom: 20px;
+    line-height: 1.6;
+    text-align: center;
 }
 
-
-
+/* Popup Button */
 .popup-button {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .popup-button:hover {
     background-color: #0056b3;
+    transform: scale(1.02); /* Slightly larger on hover */
 }
 
-/* Image styling */
+/* Image Styling */
 .popup-image {
-    width: 80px;
-    height: 120px;
+    width: 100px;
+    height: 150px;
     float: left;
     margin-right: 15px;
-    object-fit: contain;
+    object-fit: cover; /* Ensures content fits inside */
+    border-radius: 8px; /* Rounded edges */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
 }
+
+/* Clear Floats */
+.popup-content::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+
 
 /* signup and login */
 .modal{

@@ -145,9 +145,10 @@ function show(img){
     newImg.style.width='200px'
     newImg.style.height='300px'
     newImg.style.objectFit='cover'
-    newImg.style.marginTop='40px'
-    newImg.style.marginBottom='30px'
+    newImg.style.margin='40px auto 30px auto'
+    // newImg.style.marginBottom='30px'
     newImg.style.borderRadius='10px'
+    newImg.style.boxShadow=' 0 4px 8px rgba(0, 0, 0, 0.2)'
     letter.style.display='none'
     footer.style.display='none'
 
@@ -188,12 +189,33 @@ function moreInfo(button){
     pop_docu.textContent=description;
     
     // title.style.color='aqua'
-    popheader.style.color='red'
-    pop_docu.style.color='blue'
-    popImage.style.width="150px"
-    popImage.style.height="150px"
-    popImage.style.objectFit="cover"
-    popImage.style.marginLeft='60px'
+    // popheader.style.color='red'
+    // pop_docu.style.color='blue'
+    // popImage.style.width="150px"
+    // popImage.style.height="150px"
+    // popImage.style.objectFit="cover"
+    // popImage.style.marginLeft='60px'
+    popheader.style.color = '#ff4500'; // Vibrant red
+    popheader.style.fontSize = '24px';
+    popheader.style.fontWeight = 'bold';
+    popheader.style.textAlign = 'center';
+    popheader.style.textShadow = '0px 2px 5px rgba(0,0,0,0.5)'; // Subtle shadow for depth
+
+    pop_docu.style.color = '#000000'; // Pure Black for strong contrast
+
+    pop_docu.style.fontSize = '16px';
+    pop_docu.style.lineHeight = '1.8';
+    pop_docu.style.textAlign = 'justify';
+    pop_docu.style.marginTop = '10px';
+
+    popImage.style.width = "180px";
+    popImage.style.height = "180px";
+    popImage.style.objectFit = "cover";
+    popImage.style.margin = '20px auto';
+    popImage.style.display = 'block'; // Center image
+    popImage.style.borderRadius = '10px';
+    popImage.style.boxShadow = '0px 4px 15px rgba(0,0,0,0.3)'; // Add depth to the image
+
     popImage.src=imageUrl;
     document.getElementById("popupOverlay").style.display = "block";
     document.getElementById("popupContent").style.display = "block";

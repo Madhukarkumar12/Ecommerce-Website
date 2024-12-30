@@ -107,6 +107,9 @@
           "price": "25",
           "quantity": 1,
           "image": "./assets/images/crocks.jpg"
+        },
+        {
+          "quantity": 1
         }
       ]
     },
