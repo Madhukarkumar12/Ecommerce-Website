@@ -58,6 +58,8 @@ function shops(){
     card2.style.display="block";
     contact.style.display='none'
     about.style.display="none";
+    footer.style.display="none";
+    letter.style.display="none";
     // blog.style.display="none";
     // blog.style.display="none"
     
@@ -682,10 +684,12 @@ document.getElementById("logout").addEventListener('click',()=>{
     document.getElementById('signupLink').style.display = 'inline';
     document.getElementById('icon').style.display = 'none';
     document.getElementById('logout').style.display = 'none';
+    // document.getElementById("cart-modal").style.display='none'
+    homes()
     
     // window.location.reload();
     // window.onload=loadCart;
-    alert('You have successfully logged out!');
+    // alert('You have successfully logged out!');
     
     // window.onload=loadCart;
 })
@@ -764,6 +768,12 @@ function updateCartCount() {
 }
 
 function openCart() {
+
+    document.getElementById("home").style.color="black";
+    document.getElementById("shop").style.color="black";
+    document.getElementById("contact").style.color="black";
+    document.getElementById("about").style.color="black"
+    
   const cartModal = document.getElementById("cart-modal");
 
   const cartItemsContainer = document.getElementById("cart-items");
@@ -824,41 +834,83 @@ function closeCart() {
   homes();
 }
 
-function updateQuantity(id, change) {
-  const itemIndex = cart.findIndex(item => item.id === id);
-  if (itemIndex >= 0) {
-    cart[itemIndex].quantity += change;
+// function updateQuantity(id, change) {
+//   const itemIndex = cart.findIndex(item => item.id === id);
+//   if (itemIndex >= 0) {
+//     cart[itemIndex].quantity += change;
 
-    if (cart[itemIndex].quantity <= 0) {
-      cart.splice(itemIndex, 1);
-    }
+//     if (cart[itemIndex].quantity <= 0) {
+//       cart.splice(itemIndex, 1);
+//     }
 
-    saveCart();
-    updateCartCount();
-    // Send the updated cart data to the server
-    const storedUser = JSON.parse(localStorage.getItem("currentUser"));
-    if (storedUser) {
-        fetch('/update-cart', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                email: storedUser.email,
-                itemId: id,
-                quantity: cart[itemIndex] ? cart[itemIndex].quantity : 0, // Send updated quantity or 0 if item was removed
-            }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (!data.success) {
-                console.error('Error updating cart on the server:', data.message);
-            }
-        })
-        .catch(error => console.error('Error updating cart on the server:', error));
-    }
-    // refresh.......
-    openCart();
+//     saveCart();
+//     updateCartCount();
+//     // Send the updated cart data to the server
+//     const storedUser = JSON.parse(localStorage.getItem("currentUser"));
+//     if (storedUser) {
+//         fetch('/update-cart', {
+//             method: 'POST',
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify({
+//                 email: storedUser.email,
+//                 itemId: id,
+//                 quantity: cart[itemIndex] ? cart[itemIndex].quantity : 0, // Send updated quantity or 0 if item was removed
+//             }),
+//         })
+//         .then(response => response.json())
+//         .then(data => {
+//             if (!data.success) {
+//                 console.error('Error updating cart on the server:', data.message);
+//             }
+//         })
+//         .catch(error => console.error('Error updating cart on the server:', error));
+//     }
+//     // refresh.......
+//     openCart();
     
-  }
+//   }
+// }
+
+function updateQuantity(id, change) {
+    const itemIndex = cart.findIndex(item => item.id === id);
+    if (itemIndex >= 0) {
+        cart[itemIndex].quantity += change;
+
+        let updatedQuantity = cart[itemIndex].quantity;
+
+        // Remove the item locally if quantity is zero or less
+        if (updatedQuantity <= 0) {
+            cart.splice(itemIndex, 1);
+            updatedQuantity = 0; // Ensure we send 0 to the server
+        }
+
+        saveCart(); // Save the updated cart locally
+        updateCartCount(); // Update UI cart count
+
+        // Send the updated cart data to the server
+        const storedUser = JSON.parse(localStorage.getItem("currentUser"));
+        if (storedUser) {
+            fetch('/update-cart', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: storedUser.email,
+                    itemId: id,
+                    quantity: updatedQuantity, // Send the updated quantity or 0
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.success) {
+                    console.error('Error updating cart on the server:', data.message);
+                }
+            })
+            .catch(error => console.error('Error updating cart on the server:', error));
+        }
+
+        // Refresh the UI (optional, based on your implementation)
+        openCart();
+    }
 }
 
 window.onload=loadCart;

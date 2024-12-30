@@ -197,13 +197,13 @@ ul li i:hover{
     color: rgb(255, 149, 0);
 }
 
-#show-more {
+/* #show-more {
     margin: 20px;
     padding: 10px 20px;
     background-color:rgb(52, 80, 80) ;
     color: white;
     border: none;
-    /* border-radius: 5px; */
+    
     cursor: pointer;
 }
 
@@ -213,31 +213,99 @@ ul li i:hover{
     align-items: center;
 }
 #show-more:hover {
-    background-color: #12aa51; /* Darker shade on hover */
-    transform: scale(1.05); /* Slightly scales up the button on hover */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Adds a shadow effect */
+    background-color: #12aa51; 
+    transform: scale(1.05); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+} */
+
+#show-more {
+    margin: 20px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, rgb(45, 0, 66), #9d12aa); /* Modern gradient background */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase; /* Adds a professional touch */
+    border: none;
+    border-radius: 8px; /* Slightly rounded corners */
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    transition: all 0.3s ease; /* Smooth hover and focus animations */
 }
 
-#go-home{
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Space between multiple buttons */
+}
+
+#show-more:hover {
+    background: linear-gradient(135deg, #12aa51, rgb(52, 80, 80)); /* Reverse gradient on hover */
+    transform: translateY(-3px) scale(1.1); /* Lift and scale effect */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+}
+
+#show-more:active {
+    transform: translateY(2px) scale(0.98); /* Pressed button effect */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+/* #go-home{
     margin: 20px;
     padding: 10px 20px;
     background-color:rgb(52, 80, 80) ;
     color: white;
     border: none;
-    /* border-radius: 5px; */
+    
     cursor: pointer
 }
 
 #go-home:hover {
-    background-color: #12aa51; /* Darker shade on hover */
-    transform: scale(1.05); /* Slightly scales up the button on hover */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Adds a shadow effect */
+    background-color: #12aa51; 
+    transform: scale(1.05); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
 }
 
 #show-more:disabled {
     background-color: #999;
     cursor: not-allowed;
+} */
+
+#go-home {
+    margin: 20px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, rgb(52, 80, 80), #0f8a45); /* Gradient for a modern look */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase; /* Makes the text stand out */
+    border: none;
+    border-radius: 10px; /* Smooth rounded corners */
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Adds a shadow for depth */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
 }
+
+#go-home:hover {
+    background: linear-gradient(135deg, #0f8a45, rgb(52, 80, 80)); /* Reverse gradient effect */
+    transform: translateY(-3px) scale(1.1); /* Lift and scale for a hover animation */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Enhanced shadow for hover */
+}
+
+#show-more:disabled {
+    background: linear-gradient(135deg, #999, #666); /* Subtle gradient for disabled state */
+    color: #ddd;
+    cursor: not-allowed;
+    box-shadow: none; /* No shadow for a disabled button */
+}
+
+#go-home:active {
+    transform: translateY(2px) scale(0.98); /* Adds a pressed effect when clicked */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
 
 /* about */
 .about{

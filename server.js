@@ -116,6 +116,77 @@ app.post('/load-cart', (req, res) => {
 });
 
 // Update Cart Endpoint
+// app.post('/update-cart', (req, res) => {
+//     const { email, itemId, quantity } = req.body;
+
+//     if (!email || typeof itemId === 'undefined' || typeof quantity === 'undefined') {
+//         return res.json({ success: false, message: "Email, itemId, and quantity are required!" });
+//     }
+
+//     const user = database.users[email];
+
+//     if (!user) {
+//         return res.json({ success: false, message: "User not found!" });
+//     }
+
+//     const cartItemIndex = user.cart.findIndex(item => item.id === itemId);
+
+//     if (cartItemIndex >= 0) {
+//         // If quantity is 0 or less, remove the item from the cart
+//         if (quantity <= 0) {
+//             user.cart.splice(cartItemIndex, 1);
+//         } else {
+//             // Otherwise, update the item's quantity
+//             user.cart[cartItemIndex].quantity = quantity;
+//         }
+//     } else if (quantity > 0) {
+//         // If item is not in the cart and quantity > 0, add it to the cart
+//         user.cart.push({ id: itemId, quantity });
+//     }
+
+//     // Save changes to the database
+//     saveDatabase(database);
+
+//     res.json({ success: true, message: "Cart updated successfully!", cart: user.cart });
+// });
+
+// app.post('/update-cart', (req, res) => {
+//     const { email, itemId, quantity } = req.body;
+
+//     // Validate required fields
+//     if (!email || typeof itemId === 'undefined' || typeof quantity === 'undefined') {
+//         return res.json({ success: false, message: "Email, itemId, and quantity are required!" });
+//     }
+
+//     // Fetch the user by email
+//     const user = database.users[email];
+//     if (!user) {
+//         return res.json({ success: false, message: "User not found!" });
+//     }
+
+//     // Find the item in the user's cart
+//     const cartItemIndex = user.cart.findIndex(item => item.id === itemId);
+
+//     if (cartItemIndex >= 0) {
+//         // Remove the item if quantity is 0 or less
+//         if (quantity <= 0) {
+//             user.cart.splice(cartItemIndex, 1);
+//         } else {
+//             // Update the item's quantity
+//             user.cart[cartItemIndex].quantity = quantity;
+//         }
+//     } else if (quantity > 0) {
+//         // Add new item if it doesn't exist and quantity > 0
+//         user.cart.push({ id: itemId, quantity });
+//     }
+
+//     // Persist changes to the database
+//     saveDatabase(database);
+
+//     res.json({ success: true, message: "Cart updated successfully!", cart: user.cart });
+// });
+
+
 app.post('/update-cart', (req, res) => {
     const { email, itemId, quantity } = req.body;
 
@@ -124,7 +195,6 @@ app.post('/update-cart', (req, res) => {
     }
 
     const user = database.users[email];
-
     if (!user) {
         return res.json({ success: false, message: "User not found!" });
     }
@@ -132,24 +202,34 @@ app.post('/update-cart', (req, res) => {
     const cartItemIndex = user.cart.findIndex(item => item.id === itemId);
 
     if (cartItemIndex >= 0) {
-        // If quantity is 0 or less, remove the item from the cart
         if (quantity <= 0) {
             user.cart.splice(cartItemIndex, 1);
         } else {
-            // Otherwise, update the item's quantity
             user.cart[cartItemIndex].quantity = quantity;
         }
     } else if (quantity > 0) {
-        // If item is not in the cart and quantity > 0, add it to the cart
-        user.cart.push({ id: itemId, quantity });
+        // Fetch product details (e.g., name, price) from the database
+        const product = database.products.find(product => product.id === itemId);
+        if (product) {
+            user.cart.push({
+                id: itemId,
+                quantity,
+                name: product.name, // Add name
+                price: product.price, // Add price
+            });
+        } else {
+            return res.json({ success: false, message: "Product not found!" });
+        }
     }
 
-    // Save changes to the database
     saveDatabase(database);
 
-    res.json({ success: true, message: "Cart updated successfully!", cart: user.cart });
+    res.json({
+        success: true,
+        message: "Cart updated successfully!",
+        cart: user.cart, // Ensure cart includes all necessary fields (id, name, price, quantity)
+    });
 });
-
 
 
 // Start Server

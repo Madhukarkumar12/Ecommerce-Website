@@ -3,115 +3,12 @@
     "madhukarkumar26072001@gmail.com": {
       "name": "Madhukar",
       "password": "hii",
-      "cart": [
-        {
-          "id": 1,
-          "name": "Cutton Trending Shirt's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/srt1.webp"
-        },
-        {
-          "id": 2,
-          "name": "Cutton Trending Shirt's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/srt2.webp"
-        },
-        {
-          "id": 3,
-          "name": "Cutton Trending Shirt's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/srt6.webp"
-        },
-        {
-          "id": 4,
-          "name": "Trending Girl Top's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/wn4.webp"
-        },
-        {
-          "id": 5,
-          "name": "Trending Girl Top's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/wn5.webp"
-        },
-        {
-          "id": 6,
-          "name": "Trending Girl Top's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/wn6.webp"
-        }
-      ]
+      "cart": []
     },
     "aniket@gmail.com": {
       "name": "aniket",
       "password": "hii",
-      "cart": [
-        {
-          "id": 1,
-          "name": "Cutton Trending Shirt's",
-          "price": 20,
-          "quantity": 4,
-          "image": "./assets/images/srt1.webp"
-        },
-        {
-          "id": 2,
-          "name": "Cutton Trending Shirt's",
-          "price": 20,
-          "quantity": 5,
-          "image": "./assets/images/srt2.webp"
-        },
-        {
-          "id": 3,
-          "name": "Cutton Trending Shirt's",
-          "price": 20,
-          "quantity": 4,
-          "image": "./assets/images/srt6.webp"
-        },
-        {
-          "id": 4,
-          "name": "Trending Girl Top's",
-          "price": 20,
-          "quantity": 2,
-          "image": "./assets/images/wn4.webp"
-        },
-        {
-          "id": 5,
-          "name": "Trending Girl Top's",
-          "price": 20,
-          "quantity": 2,
-          "image": "./assets/images/wn5.webp"
-        },
-        {
-          "id": 6,
-          "name": "Trending Girl Top's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/wn6.webp"
-        },
-        {
-          "id": 8,
-          "name": "Trending Shoes",
-          "price": "30",
-          "quantity": 1,
-          "image": "./assets/images/shoes.jpg"
-        },
-        {
-          "id": 9,
-          "name": "Trending Crocks",
-          "price": "25",
-          "quantity": 1,
-          "image": "./assets/images/crocks.jpg"
-        },
-        {
-          "quantity": 1
-        }
-      ]
+      "cart": []
     },
     "ankit@gmail.com": {
       "name": "ankit",
@@ -121,206 +18,32 @@
     "test@gmail.com": {
       "name": "test",
       "password": "hii",
-      "cart": [
-        {
-          "id": 1,
-          "name": "Cutton Trending Shirt's",
-          "price": 20,
-          "quantity": 2,
-          "image": "./assets/images/srt1.webp"
-        },
-        {
-          "id": 2,
-          "name": "Cutton Trending Shirt's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/srt2.webp"
-        },
-        {
-          "id": 3,
-          "name": "Cutton Trending Shirt's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/srt6.webp"
-        },
-        {
-          "id": 4,
-          "name": "Trending Girl Top's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/wn4.webp"
-        },
-        {
-          "id": 5,
-          "name": "Trending Girl Top's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/wn5.webp"
-        },
-        {
-          "id": 6,
-          "name": "Trending Girl Top's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/wn6.webp"
-        }
-      ]
+      "cart": []
     },
     "khelo@gmail.com": {
       "name": "khelo",
       "password": "hii",
-      "cart": [
-        {
-          "id": 1,
-          "name": "Cutton Trending Shirt's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/srt1.webp"
-        },
-        {
-          "id": 2,
-          "name": "Cutton Trending Shirt's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/srt2.webp"
-        },
-        {
-          "id": 3,
-          "name": "Cutton Trending Shirt's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/srt6.webp"
-        },
-        {
-          "id": 4,
-          "name": "Trending Girl Top's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/wn4.webp"
-        },
-        {
-          "id": 8,
-          "name": "Trending Shoes",
-          "price": 30,
-          "quantity": 1,
-          "image": "./assets/images/shoes.jpg"
-        },
-        {
-          "id": 9,
-          "name": "Trending Crocks",
-          "price": 25,
-          "quantity": 1,
-          "image": "./assets/images/crocks.jpg"
-        },
-        {
-          "id": 7,
-          "name": "Trending Slipper",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/slipper.jpg"
-        }
-      ]
+      "cart": []
     },
     "chalo@gmail.com": {
       "name": "chalo",
       "password": "hii",
-      "cart": [
-        {
-          "id": 1,
-          "name": "Cutton Trending Shirt's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/srt1.webp"
-        },
-        {
-          "id": 2,
-          "name": "Cutton Trending Shirt's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/srt2.webp"
-        }
-      ]
+      "cart": []
     },
     "padho@gmail.com": {
       "name": "padho",
       "password": "hii",
-      "cart": [
-        {
-          "id": 1,
-          "name": "Cutton Trending Shirt's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/srt1.webp"
-        },
-        {
-          "id": 2,
-          "name": "Cutton Trending Shirt's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/srt2.webp"
-        },
-        {
-          "id": 3,
-          "name": "Cutton Trending Shirt's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/srt6.webp"
-        }
-      ]
+      "cart": []
     },
     "sohan@gmail.com": {
       "name": "sohan",
       "password": "hii",
-      "cart": [
-        {
-          "id": 2,
-          "name": "Cutton Trending Shirt's",
-          "price": 20,
-          "quantity": 2,
-          "image": "./assets/images/srt2.webp"
-        },
-        {
-          "id": 1,
-          "name": "Cutton Trending Shirt's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/wn4.webp"
-        },
-        {
-          "id": 8,
-          "name": "Trending Shoes",
-          "price": 30,
-          "quantity": 1,
-          "image": "./assets/images/shoes.jpg"
-        },
-        {
-          "id": 9,
-          "name": "Trending Crocks",
-          "price": 25,
-          "quantity": 1,
-          "image": "./assets/images/crocks.jpg"
-        },
-        {
-          "id": 7,
-          "name": "Trending Slipper",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/slipper.jpg"
-        }
-      ]
+      "cart": []
     },
     "ram@gmail.com": {
       "name": "ram",
       "password": "hii",
-      "cart": [
-        {
-          "id": 6,
-          "name": "Trending Girl Top's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/wn6.webp"
-        }
-      ]
+      "cart": []
     }
   }
 }
