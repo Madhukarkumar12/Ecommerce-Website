@@ -115,6 +115,42 @@ app.post('/load-cart', (req, res) => {
     }
 });
 
+// Update Cart Endpoint
+app.post('/update-cart', (req, res) => {
+    const { email, itemId, quantity } = req.body;
+
+    if (!email || typeof itemId === 'undefined' || typeof quantity === 'undefined') {
+        return res.json({ success: false, message: "Email, itemId, and quantity are required!" });
+    }
+
+    const user = database.users[email];
+
+    if (!user) {
+        return res.json({ success: false, message: "User not found!" });
+    }
+
+    const cartItemIndex = user.cart.findIndex(item => item.id === itemId);
+
+    if (cartItemIndex >= 0) {
+        // If quantity is 0 or less, remove the item from the cart
+        if (quantity <= 0) {
+            user.cart.splice(cartItemIndex, 1);
+        } else {
+            // Otherwise, update the item's quantity
+            user.cart[cartItemIndex].quantity = quantity;
+        }
+    } else if (quantity > 0) {
+        // If item is not in the cart and quantity > 0, add it to the cart
+        user.cart.push({ id: itemId, quantity });
+    }
+
+    // Save changes to the database
+    saveDatabase(database);
+
+    res.json({ success: true, message: "Cart updated successfully!", cart: user.cart });
+});
+
+
 
 // Start Server
 app.listen(3000, () => {

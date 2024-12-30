@@ -24,7 +24,11 @@ function homes(){
     footer.style.display='flex'
      sectionIndex=0;
     document.getElementById("more-sections").innerHTML = ""; // Clear previous sections
-    document.getElementById("show-more").disabled = false; // 
+    document.getElementById("more-sections").style.display = "block";
+    document.getElementById("show-more").disabled = false;
+    document.getElementById("show-more").style.display = "block"
+
+    // document.getElementById("show-more").disabled = false; 
     document.getElementById("loginModal").style.display='none'
     document.getElementById("signupModal").style.display='none'
     document.getElementById("cart-modal").style.display='none'
@@ -39,7 +43,7 @@ function homes(){
     document.getElementById("shop").style.color="black";
     document.getElementById("contact").style.color="black";
     document.getElementById("about").style.color="black"
-    document.getElementById("show-more").style.display="block"
+    // document.getElementById("show-more").style.display="block"
     
 
 }
@@ -52,19 +56,28 @@ function shops(){
     mainPage.style.display="none";
     card.style.display="block";
     card2.style.display="block";
+    contact.style.display='none'
+    about.style.display="none";
     // blog.style.display="none";
     // blog.style.display="none"
     
-    
+    sectionIndex=0;
     // document.getElementById("blog").style.color="black";
+    // Reset "Show More" section
+    document.getElementById("more-sections").innerHTML = ""; // Clear any existing content
+    document.getElementById("more-sections").style.display = "block";
+    document.getElementById("show-more").disabled = false;
+    document.getElementById("show-more").style.display = "block";
+
     document.getElementById("home").style.color="black";
     document.getElementById("shop").style.color="rgb(2, 173, 173)";
     document.getElementById("contact").style.color="black";
     document.getElementById("about").style.color="black"
-    document.getElementById("show-more").style.display="block"
-    document.getElementById("more-sections").style.display="block"
+    // document.getElementById("show-more").style.display="block"
+    // document.getElementById("more-sections").style.display="block"
     document.getElementById("loginModal").style.display='none'
     document.getElementById("signupModal").style.display='none'
+    document.getElementById("cart-modal").style.display='none'
     
 }
 
@@ -76,16 +89,24 @@ function abouts(){
     card2.style.display="none";
     // blog.style.display="none";
     about.style.display="block"
-
+    contact.style.display="none"
+    sectionIndex=0;
     // document.getElementById("blog").style.color="black";
+    document.getElementById("more-sections").innerHTML = ""; // Clear any existing content
+    document.getElementById("more-sections").style.display = "none";
+    document.getElementById("show-more").style.display = "none";
+    document.getElementById("go-home").style.display = "none";
+
     document.getElementById("home").style.color="black";
     document.getElementById("shop").style.color="black";
     document.getElementById("contact").style.color="black";
     document.getElementById("about").style.color="rgb(2, 173, 173)"
-    document.getElementById("show-more").style.display="none"
-    document.getElementById("more-sections").style.display="none"
+    // document.getElementById("show-more").style.display="none"
+    // document.getElementById("more-sections").style.display="none"
+    // document.getElementById("go-home").style.display="none"
     document.getElementById("loginModal").style.display='none'
     document.getElementById("signupModal").style.display='none'
+    document.getElementById("cart-modal").style.display='none'
 }
 
 function contacts(){
@@ -104,13 +125,20 @@ function contacts(){
     document.getElementById("contact").style.color="rgb(2, 173, 173)"
     document.getElementById("show-more").style.display="none"
     document.getElementById("more-sections").style.display="none"
-
+    document.getElementById("go-home").style.display="none"
     document.getElementById("loginModal").style.display='none'
     document.getElementById("signupModal").style.display='none'
+    document.getElementById("cart-modal").style.display='none'
 }
 // cart ki baari hai ab....
 
 function show(img){
+
+    if(! isLoggedIn()){
+        alert("Please Login to Access");
+        return;
+    }
+
     let newImg = document.getElementById("newImg");
     // console.log(img);
     newImg.src=img.src;
@@ -137,10 +165,19 @@ function show(img){
 
 
 
-
+let popupTimeout; 
 function moreInfo(button){
     
+    if(! isLoggedIn()){
+        alert("Please Login for moreInfo!");
+        return;
+    }
     
+    // Clear the previous timeout if it exists
+    if (popupTimeout) {
+        clearTimeout(popupTimeout);
+    }
+
     const imageUrl=button.getAttribute("data-image");
     const popImage=document.getElementById("new-Img");
     const title=button.getAttribute("data-title");
@@ -168,13 +205,14 @@ function moreInfo(button){
 
     
 
-    setTimeout(() => {
+    popupTimeout=setTimeout(() => {
        
         document.getElementById("popupOverlay").style.display = "none";
         document.getElementById("popupContent").style.display = "none";
         
     }, 5000);
 }
+
 function closeButton(){
     document.querySelector(".cart").style.display="none";
     mainPage.style.display="flex";
@@ -775,7 +813,29 @@ function updateQuantity(id, change) {
 
     saveCart();
     updateCartCount();
+    // Send the updated cart data to the server
+    const storedUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (storedUser) {
+        fetch('/update-cart', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email: storedUser.email,
+                itemId: id,
+                quantity: cart[itemIndex] ? cart[itemIndex].quantity : 0, // Send updated quantity or 0 if item was removed
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.success) {
+                console.error('Error updating cart on the server:', data.message);
+            }
+        })
+        .catch(error => console.error('Error updating cart on the server:', error));
+    }
+    // refresh.......
     openCart();
+    
   }
 }
 
