@@ -52,27 +52,27 @@ ul li i:hover{
     font-size: 14px;
 } */
 
-#loginLink, #signupLink, #logout {
+/* #loginLink, #signupLink, #logout {
     text-decoration: none;
     padding: 10px 15px;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
     font-weight: bold;
     cursor: pointer;
-}
+} */
 
-#loginLink {
-    background-color: #4CAF50; /* Green */
+/* #loginLink {
+    background-color: #4CAF50; 
     color: white;
-}
+} */
 
-#signupLink {
-    background-color: #2196F3; /* Blue */
+/* #signupLink {
+    background-color: #2196F3; 
     color: white;
-}
+} */
 
 #logout {
-    background-color: #f44336; /* Red */
+    background-color: #f44336; 
     color: white;
 }
 
@@ -92,7 +92,7 @@ ul li i:hover{
     position: absolute;
     top: -8px;
     right: -8px;
-    background-color: #f44336; /* Red */
+    background-color: #f44336; 
     color: white;
     font-size: 12px;
     border-radius: 50%;
@@ -100,20 +100,129 @@ ul li i:hover{
     font-weight: bold;
 }
 
-#loginLink:hover, #signupLink:hover, #logout:hover {
+ /* #logout:hover {
     background-color: #000;
     color: #fff;
-}
+} */
 
 #logout {
-    display: none; /* Initially hidden */
+    display: none; 
     padding: 10px 20px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 #logout:hover {
-    background-color: #c62828; /* Darker Red */
+    background-color: #c62828; 
+} 
+
+ /*dropdown section....  */
+.dropdown{
+    position: relative;
+    display: inline-block;
 }
+
+.dropdown-toggle{
+    cursor: pointer;
+    text-decoration: none;
+    color: #251f1f;
+    padding: 5px 10px;
+    font-weight: bold;
+    position: relative;
+    animation: sparkle 2s infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ffb6c1;
+    }
+    50% {
+        text-shadow: 0 0 10px #ffcccb, 0 0 20px #ffcccb, 0 0 30px #ffc0cb;
+    }
+}
+
+.dropdown-toggle:hover {
+    color: #ff69b4; 
+    animation: sparkle-hover 1s infinite; 
+}
+
+@keyframes sparkle-hover {
+    0%, 100% {
+        text-shadow: 0 0 8px #ff99cc, 0 0 15px #ff66cc, 0 0 20px #ff33cc;
+    }
+    50% {
+        text-shadow: 0 0 15px #ff1493, 0 0 30px #ff1493, 0 0 40px #ff69b4;
+    }
+}
+
+
+
+.dropdown-menu{
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 150px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease; 
+    opacity: 0;
+    transform: translateY(10px);
+    max-height: 200px; /* Limit the height in case of too many items */
+    /* overflow-y: auto; */
+    object-fit: cover;
+}
+
+.dropdown-menu li {
+    margin: 6px 0;
+    padding: 0;
+}
+
+
+.dropdown-menu a {
+    text-decoration: none;
+    color:#333333;
+    padding: 10px 20px;
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    padding: 5px;
+    /* margin: 10px; */
+    border-radius: 5px;
+    
+    box-sizing: border-box;
+}
+.dropdown-menu a:hover {
+    background-color: #f4f4f4; 
+    color: #0078d7; 
+    
+}
+
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    opacity: 1; 
+    transform: translateY(0);
+}
+
+.dropdown {
+    position: relative;
+}
+.dropdown a.dropdown-toggle {
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+.dropdown a.dropdown-toggle:hover {
+    color: #0078d7;
+    text-decoration: underline; 
+}
+
 
 .main{
     display: flex;
@@ -197,7 +306,7 @@ ul li i:hover{
     color: rgb(255, 149, 0);
 }
 
-/* #show-more {
+#show-more {
     margin: 20px;
     padding: 10px 20px;
     background-color:rgb(52, 80, 80) ;
@@ -216,43 +325,10 @@ ul li i:hover{
     background-color: #12aa51; 
     transform: scale(1.05); 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
-} */
-
-#show-more {
-    margin: 20px;
-    padding: 12px 24px;
-    background: linear-gradient(135deg, rgb(45, 0, 66), #9d12aa); /* Modern gradient background */
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    text-transform: uppercase; /* Adds a professional touch */
-    border: none;
-    border-radius: 8px; /* Slightly rounded corners */
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
-    transition: all 0.3s ease; /* Smooth hover and focus animations */
-}
-
-.button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px; /* Space between multiple buttons */
-}
-
-#show-more:hover {
-    background: linear-gradient(135deg, #12aa51, rgb(52, 80, 80)); /* Reverse gradient on hover */
-    transform: translateY(-3px) scale(1.1); /* Lift and scale effect */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
-}
-
-#show-more:active {
-    transform: translateY(2px) scale(0.98); /* Pressed button effect */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 
-/* #go-home{
+#go-home{
     margin: 20px;
     padding: 10px 20px;
     background-color:rgb(52, 80, 80) ;
@@ -271,40 +347,40 @@ ul li i:hover{
 #show-more:disabled {
     background-color: #999;
     cursor: not-allowed;
-} */
+}
 
-#go-home {
+/* #go-home {
     margin: 20px;
     padding: 12px 24px;
-    background: linear-gradient(135deg, rgb(52, 80, 80), #0f8a45); /* Gradient for a modern look */
+    background: linear-gradient(135deg, rgb(52, 80, 80), #0f8a45); 
     color: white;
     font-size: 16px;
     font-weight: bold;
-    text-transform: uppercase; /* Makes the text stand out */
+    text-transform: uppercase; 
     border: none;
-    border-radius: 10px; /* Smooth rounded corners */
+    border-radius: 10px; 
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Adds a shadow for depth */
-    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+    transition: all 0.3s ease; 
 }
 
 #go-home:hover {
-    background: linear-gradient(135deg, #0f8a45, rgb(52, 80, 80)); /* Reverse gradient effect */
-    transform: translateY(-3px) scale(1.1); /* Lift and scale for a hover animation */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Enhanced shadow for hover */
+    background: linear-gradient(135deg, #0f8a45, rgb(52, 80, 80)); 
+    transform: translateY(-3px) scale(1.1); 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); 
 }
 
 #show-more:disabled {
-    background: linear-gradient(135deg, #999, #666); /* Subtle gradient for disabled state */
+    background: linear-gradient(135deg, #999, #666); 
     color: #ddd;
     cursor: not-allowed;
-    box-shadow: none; /* No shadow for a disabled button */
+    box-shadow: none; 
 }
 
 #go-home:active {
-    transform: translateY(2px) scale(0.98); /* Adds a pressed effect when clicked */
+    transform: translateY(2px) scale(0.98); 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
+} */
 
 
 /* about */
@@ -730,7 +806,7 @@ ul li i:hover{
     margin-top: 10px;
 }
 
-#loginLink,#signupLink{
+/* #loginLink,#signupLink{
     width: 100%;
     padding: 10px;
     background-color: #007bff;
@@ -739,21 +815,21 @@ ul li i:hover{
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-}
+} */
 
-#loginLink:hover{
+/* #loginLink:hover{
     transition: 0.6s ease;
-    transform: scale(1.05); /* Slightly scales up the button on hover */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Adds a shadow effect */
+    transform: scale(1.05); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
     background-color: #12aa51;
-}
+} */
 
-#signupLink:hover{
+/* #signupLink:hover{
     transition: 0.6s ease;
-    transform: scale(1.05); /* Slightly scales up the button on hover */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Adds a shadow effect */
+    transform: scale(1.05); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
     background-color: #12aa51;
-}
+} */
 
 /* add to cart stylong........ */
 

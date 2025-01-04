@@ -20,15 +20,25 @@
                     <!-- <a id="blog" onclick="blogs()">Blog</a> -->
                     <a id="about" onclick="abouts()">About</a>
                     <a id="contact" onclick="contacts()">Contact</a>
-                    <span id="login-cart">
-                        <!-- <a href="#" id="login" onclick="openLoginModal()">Login</a> -->
-                        <!-- <a href="#" id="cart" style="display: none;">
-                            <img src="cart-icon.png" alt="Cart" width="24">
-                        </a> -->
+                    <!-- <span id="login-cart">
                         <a onclick="openLoginModal()" id="loginLink">Login</a>
                         <a onclick="openSignupModal()" id="signupLink">Sign Up</a>
                         <i class="fa-sharp fa-solid fa-cart-shopping" style="display:none" id="icon" onclick="openCart()" ><span id="cart-count">0</span></i>
                         <a  id="logout" style="display:none">Logout</a>
+                    </span> -->
+
+                    <span id="login-cart">
+                        <div class="dropdown">
+                            <a id="connect" class="dropdown-toggle">Connect</a>
+                            <ul class="dropdown-menu">
+                                <li><a onclick="openLoginModal()" id="loginLink">Login</a></li>
+                                <li><a onclick="openSignupModal()" id="signupLink">Sign Up</a></li>
+                            </ul>
+                        </div>
+                        <i class="fa-sharp fa-solid fa-cart-shopping" style="display:none" id="icon" onclick="openCart()">
+                            <span id="cart-count">0</span>
+                        </i>
+                        <a id="logout" style="display:none">Logout</a>
                     </span>
                     <!-- <i class="fa-sharp fa-solid fa-cart-shopping"></i> -->
 
@@ -65,7 +75,7 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i> <br>
                         <p class="price"><span>$:</span>20</p>
-                        <button onclick="addCart(1,'Cutton Trending Shirt\'s',20,'./assets/images/srt1.webp')">Add to Cart</button>
+                        <button class="cart-button" onclick="addCart(1,'Cutton Trending Shirt\'s',20,'./assets/images/srt1.webp',this)">Add to Cart</button>
                         <button class="more-Info" onclick="moreInfo(this)" data-image="./assets/images/srt1.webp"
                          data-title="Cutton Trending Shirt's"
                          data-description="A comfortable and stylish cotton shirt, perfect for any occasion."
@@ -86,7 +96,7 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i> <br>
                         <p class="price"><span>$:</span>20</p>
-                        <button onclick="addCart(2,'Cutton Trending Shirt\'s',20,'./assets/images/srt2.webp')">Add to Cart</button>
+                        <button class="cart-button" onclick="addCart(2,'Cutton Trending Shirt\'s',20,'./assets/images/srt2.webp')">Add to Cart</button>
                         <button class="more-Info" onclick="moreInfo(this)" data-image="./assets/images/srt2.webp"
                         data-title="Cutton Trending Shirt's"
                         data-description="It is cutton shirt of gray line appears fantasic...."
@@ -104,7 +114,7 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-sharp-half-stroke"></i><br>
                         <p class="price"><span>$:</span>20</p>
-                        <button onclick="addCart(3,'Cutton Trending Shirt\'s',20,'./assets/images/srt6.webp')">Add to Cart</button>
+                        <button class="cart-button" onclick="addCart(3,'Cutton Trending Shirt\'s',20,'./assets/images/srt6.webp')">Add to Cart</button>
                         <button class="more-Info" onclick="moreInfo(this)" data-image="./assets/images/srt6.webp"
                          data-title="Cutton Trending Shirt's" 
                          data-description="It is cutton shirt of white appears fantasic.... and gives spot in color"
@@ -132,7 +142,7 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i> <br>
                         <p class="price"><span>$:</span>20</p>
-                        <button onclick="addCart(4,'Trending Girl Top\'s',20,'./assets/images/wn4.webp')">Add to Cart</button>
+                        <button class="cart-button" onclick="addCart(4,'Trending Girl Top\'s',20,'./assets/images/wn4.webp')">Add to Cart</button>
                         <button class="more-Info" onclick="moreInfo(this)" data-image="./assets/images/wn4.webp"
                           data-title="Trending Girl Top's"
                           data-description="It is Girl tops of red in appearance with affordable price in good quality"
@@ -151,7 +161,7 @@
                         <i class="fa-solid fa-star-sharp-half-stroke"></i>
                          <br>
                          <p class="price"><span>$:</span>20</p>
-                        <button onclick="addCart(5,'Trending Girl Top\'s',20,'./assets/images/wn5.webp')">Add to Cart</button>
+                        <button class="cart-button" onclick="addCart(5,'Trending Girl Top\'s',20,'./assets/images/wn5.webp')">Add to Cart</button>
                         <button onclick="moreInfo(this)" data-image="./assets/images/wn5.webp"
                          data-title="Trending Girl Top's"
                          data-description="It is Girl tops of blue in appearance with affordable price in good quality"
@@ -169,7 +179,7 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i> <br>
                         <p class="price"><span>$:</span>20</p>
-                        <button onclick="addCart(6,'Trending Girl Top\'s',20,'./assets/images/wn6.webp')">Add to Cart</button>
+                        <button class="cart-button" onclick="addCart(6,'Trending Girl Top\'s',20,'./assets/images/wn6.webp')">Add to Cart</button>
                         <button onclick="moreInfo(this)" data-image="./assets/images/wn6.webp"
                          data-title="Trending Girl Top's"
                          data-description="It is Girl tops of black with white in appearance with affordable price in good quality"

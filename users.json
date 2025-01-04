@@ -3,12 +3,73 @@
     "madhukarkumar26072001@gmail.com": {
       "name": "Madhukar",
       "password": "hii",
-      "cart": []
+      "cart": [
+        {
+          "id": 5,
+          "name": "Trending Girl Top's",
+          "price": 20,
+          "quantity": 1,
+          "image": "./assets/images/wn5.webp"
+        },
+        {
+          "id": 6,
+          "name": "Trending Girl Top's",
+          "price": 20,
+          "quantity": 1,
+          "image": "./assets/images/wn6.webp"
+        },
+        {
+          "id": 8,
+          "name": "Trending Shoes",
+          "price": "30",
+          "quantity": 1,
+          "image": "./assets/images/shoes.jpg"
+        },
+        {
+          "id": 9,
+          "name": "Trending Crocks",
+          "price": "25",
+          "quantity": 1,
+          "image": "./assets/images/crocks.jpg"
+        },
+        {
+          "id": 11,
+          "name": "Trending Handbags",
+          "price": "32",
+          "quantity": 1,
+          "image": "./assets/images/handbag.jpg"
+        }
+      ]
     },
     "aniket@gmail.com": {
       "name": "aniket",
       "password": "hii",
-      "cart": []
+      "cart": [
+        {
+          "id": 1,
+          "name": "Cutton Trending Shirt's",
+          "price": 20,
+          "quantity": 5,
+          "image": "./assets/images/srt1.webp"
+        },
+        {
+          "id": 2,
+          "name": "Cutton Trending Shirt's",
+          "price": 20,
+          "quantity": 4,
+          "image": "./assets/images/srt2.webp"
+        },
+        {
+          "id": 6,
+          "name": "Trending Girl Top's",
+          "price": 20,
+          "quantity": 2,
+          "image": "./assets/images/wn6.webp"
+        },
+        {
+          "quantity": 1
+        }
+      ]
     },
     "ankit@gmail.com": {
       "name": "ankit",
@@ -44,6 +105,117 @@
       "name": "ram",
       "password": "hii",
       "cart": []
+    },
+    "chalna@gmail.com": {
+      "name": "chalna",
+      "password": "hii",
+      "cart": [
+        {
+          "id": 1,
+          "name": "Cutton Trending Shirt's",
+          "price": 20,
+          "quantity": 1,
+          "image": "./assets/images/srt1.webp"
+        },
+        {
+          "id": 2,
+          "name": "Cutton Trending Shirt's",
+          "price": 20,
+          "quantity": 1,
+          "image": "./assets/images/srt2.webp"
+        },
+        {
+          "id": 3,
+          "name": "Cutton Trending Shirt's",
+          "price": 20,
+          "quantity": 1,
+          "image": "./assets/images/srt6.webp"
+        },
+        {
+          "id": 4,
+          "name": "Trending Girl Top's",
+          "price": 20,
+          "quantity": 1,
+          "image": "./assets/images/wn4.webp"
+        },
+        {
+          "id": 5,
+          "name": "Trending Girl Top's",
+          "price": 20,
+          "quantity": 1,
+          "image": "./assets/images/wn5.webp"
+        },
+        {
+          "id": 6,
+          "name": "Trending Girl Top's",
+          "price": 20,
+          "quantity": 1,
+          "image": "./assets/images/wn6.webp"
+        },
+        {
+          "id": 7,
+          "name": "Trending Slipper",
+          "price": "20",
+          "quantity": 1,
+          "image": "./assets/images/slipper.jpg"
+        },
+        {
+          "id": 8,
+          "name": "Trending Shoes",
+          "price": "30",
+          "quantity": 1,
+          "image": "./assets/images/shoes.jpg"
+        },
+        {
+          "id": 9,
+          "name": "Trending Crocks",
+          "price": "25",
+          "quantity": 1,
+          "image": "./assets/images/crocks.jpg"
+        },
+        {
+          "id": 10,
+          "name": "Trending Backpacks",
+          "price": "40",
+          "quantity": 1,
+          "image": "./assets/images/bagpack.jpg"
+        },
+        {
+          "id": 11,
+          "name": "Trending Handbags",
+          "price": "32",
+          "quantity": 1,
+          "image": "./assets/images/handbag.jpg"
+        },
+        {
+          "id": 12,
+          "name": "Trending Travel-bags",
+          "price": "50",
+          "quantity": 1,
+          "image": "./assets/images/travelling_bag.jpg"
+        },
+        {
+          "id": 13,
+          "name": "Trending Watches",
+          "price": "80",
+          "quantity": 1,
+          "image": "./assets/images/watch.jpg"
+        },
+        {
+          "id": 14,
+          "name": "Trending Sun-glass",
+          "price": "60",
+          "quantity": 1,
+          "image": "./assets/images/sunglass.jpg"
+        },
+        {
+          "id": 15,
+          "name": "Trending Belt",
+          "price": "70",
+          "quantity": 1,
+          "image": "./assets/images/belt.jpg"
+        }
+      ]
     }
   }
 }

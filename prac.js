@@ -44,6 +44,7 @@ function homes(){
     document.getElementById("contact").style.color="black";
     document.getElementById("about").style.color="black"
     // document.getElementById("show-more").style.display="block"
+    document.getElementById("go-home").style.display="none";
     
 
 }
@@ -279,6 +280,8 @@ function createProductSection(titleText, products) {
     products.forEach(product => {
         const crdDiv = document.createElement('div');
         crdDiv.className = 'crd';
+        // crdDiv.setAttribute('data-id', product.id);
+        crdDiv.id=product.id;
 
         const img = document.createElement('img');
         img.src = product.image;
@@ -302,17 +305,23 @@ function createProductSection(titleText, products) {
         halfStarIcon.className = 'fa-solid fa-star-half-stroke';
         crdTextDiv.appendChild(halfStarIcon);
         crdTextDiv.appendChild(document.createElement('br'));
-        
-      
-        
-        const addToCartButton = document.createElement('button');
-        // addToCartButton.onclick = addCart;
-        const price=product.price;
-        const id=product.id;
-        const name=product.name;
-        addToCartButton.textContent = 'Add to Cart';
-        addToCartButton.onclick=function(){addCart(id,name,price,product.image)}
-        crdTextDiv.appendChild(addToCartButton);
+
+        // Price element
+        const priceParagraph = document.createElement('p');
+        priceParagraph.className = 'price';
+        priceParagraph.innerHTML = `<span>$:</span>${product.price}`;
+        crdTextDiv.appendChild(priceParagraph);
+
+         // Add to Cart button
+         const addToCartButton = document.createElement('button');
+         addToCartButton.className = 'cart-button';
+         addToCartButton.textContent = 'Add to Cart';
+         addToCartButton.onclick = function () {
+             addCart(product.id, product.name, product.price, product.image,this);
+            //  updateCartButton();
+         };
+         crdTextDiv.appendChild(addToCartButton);
+ 
 
         const moreInfoButton = document.createElement('button');
         moreInfoButton.className = 'more-Info';
@@ -390,20 +399,13 @@ const sectionsData = [
     }
 ];
 
-// Create sections for each data entry
-// sectionsData.forEach(sectionData => {
-//     createProductSection(sectionData.title, sectionData.products);
-// });
-
-
-
-
 
 function showMore(){
     if(sectionIndex<sectionsData.length){
         const sectionData=sectionsData[sectionIndex];
         // sectionData.style.display='block'
         createProductSection(sectionData.title, sectionData.products);
+        updateCartButton();
         sectionIndex++;
     }
 
@@ -413,36 +415,17 @@ function showMore(){
     }
 }
 
-
-
-
-
 function goHome() {
-    
     document.getElementById("go-home").style.display='none'
     homes();
-
-
 }
 
 
-
-
-
-
-// // Close popup when 'x' is clicked
 document.getElementById("popupClose").onclick = function() {
     document.getElementById("popupOverlay").style.display = "none";
     document.getElementById("popupContent").style.display = "none";
 };
 
-// // Close popup when clicking outside of it
-// document.getElementById("popupOverlay").onclick = function() {
-//     document.getElementById("popupOverlay").style.display = "none";
-//     document.getElementById("popupContent").style.display = "none";
-// };
-
-// playing with signup and signin modal......
  
 function openSignupModal() {
     document.getElementById('signupModal').style.display = 'flex';
@@ -482,12 +465,8 @@ function closeLoginModal() {
 }
 
 
-// storage playing.....
-// let database={
-//     users:{},
-// }
-
 let currentUser=null;
+
 function signup(event) {
     event.preventDefault();
     
@@ -495,53 +474,53 @@ function signup(event) {
     const email = document.getElementById('signupEmail').value.trim();
     const password = document.getElementById('signupPassword').value.trim();
 
-    if(!name || !email || !password){
-        alert("All Fields are required");
+    if (!name || !email || !password) {
+        alert("All fields are required!");
         return;
     }
 
-    // server side....
-    fetch('/signup',{
-        method:'POST',
+    // Send signup data to the server
+    fetch('/signup', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password }),
     })
-    .then(response => response.json())
+        .then(response => response.json())
         .then(data => {
             if (data.success) {
-                alert("Account created successfully! You can now log in.");
-                closeSignupModal();
-                // Load the cart for the new user
-                loadCart(); // Load the cart after signup
+                alert("Account created successfully! Logging you in...");
+                // Simulate login after successful signup
+                fetch('/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password }), 
+                })
+                    .then(loginResponse => loginResponse.json())
+                    .then(loginData => {
+                        if (loginData.success) {
+                            currentUser = loginData.user; 
+                            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+                            alert(`Welcome, ${loginData.user.name}!`);
+                            updateCartCount();
+                            loadCart();
+                            document.getElementById('loginLink').style.display = 'none';
+                            document.getElementById('signupLink').style.display = 'none';
+                            document.getElementById('icon').style.display = 'inline';
+                            document.getElementById('logout').style.display = 'inline';
+                            closeSignupModal(); 
+                        } else {
+                            alert("Failed to log in after signup. Please try logging in manually.");
+                        }
+                    })
+                    .catch(loginError => console.error('Login Error:', loginError));
             } else {
                 alert(data.message);
             }
         })
-        .catch(error => console.error('Error:', error));
-
-    // Store signup details in local storage (for demo purposes only)
-    // These lines store the user's input values (email, password, and name) into the browser's local storage. localStorage.setItem() saves the data as key-value pairs:
-    // localStorage.setItem('userEmail', email);
-    // localStorage.setItem('userPassword', password);
-    // localStorage.setItem('userName', name);
-
-    
-
-    // if(database.users[email]){
-    //     alert("This email is already registered. Please log in.");
-    //     return;
-    // }
-
-    // database.users[email]={
-    //     name:name,
-    //     password:password,
-    //     cart:[]
-    // }
-    
-    // alert("Account created successfully! You can now login.");
-    document.getElementById('signupLink').style.display = 'none';
-    // closeSignupModal();
+        .catch(signupError => console.error('Signup Error:', signupError));
 }
+
 
 function login(event) {
     event.preventDefault();
@@ -549,36 +528,6 @@ function login(event) {
     const email = document.getElementById('loginEmail').value.trim();
     const password = document.getElementById('loginPassword').value.trim();
     
-    // Retrieve stored credentials
-    // const storedEmail = localStorage.getItem('userEmail');
-    // const storedPassword = localStorage.getItem('userPassword');
-    
-    // if (email === storedEmail && password === storedPassword) {
-
-    //     localStorage.setItem('isLoggedIn', 'true');
-    //     // Hide login and signup links, show cart icon
-    //     document.getElementById('loginLink').style.display = 'none';
-    //     document.getElementById('signupLink').style.display = 'none';
-    //     document.getElementById('icon').style.display = 'inline';
-    //     closeLoginModal();
-    // } else {
-    //     // Show error message
-    //     document.getElementById('loginError').style.display = 'block';
-        
-    // }
-    //    Playing with own database.....
-    // if(database.users[email] && database.users[email].password === password){
-    //     currentUser=email;
-    //     alert(`Welcome ${database.users[email].name}`);
-    //     document.getElementById('loginLink').style.display = 'none';
-    //     document.getElementById('signupLink').style.display = 'none';
-    //     document.getElementById('icon').style.display = 'inline';
-    //     closeLoginModal();
-
-    // }
-    // else{
-    //     document.getElementById('loginError').style.display = 'block';
-    // }
 
     if (!email || !password) {
         alert("All fields are required!");
@@ -613,31 +562,7 @@ function login(event) {
 
 // Function to check login status on page load
 function checkLoginStatus() {
-    // const isLoggedIn = localStorage.getItem('isLoggedIn');
-    
-    // if (isLoggedIn === 'true') {
-    //     // Hide login and signup links, show cart icon
-    //     document.getElementById('loginLink').style.display = 'none';
-    //     document.getElementById('signupLink').style.display = 'none';
-    //     document.getElementById('icon').style.display = 'inline';
-    // } else {
-    //     // Show login and signup links, hide cart icon
-    //     document.getElementById('loginLink').style.display = 'inline';
-    //     document.getElementById('signupLink').style.display = 'inline';
-    //     document.getElementById('icon').style.display = 'none';
-    // }
-
-    // if(database.users[currentUser]){
-         // Hide login and signup links, show cart icon
-        // document.getElementById('loginLink').style.display = 'none';
-        // document.getElementById('signupLink').style.display = 'none';
-        // document.getElementById('icon').style.display = 'inline';
-    // }
-    // else{
-    //     document.getElementById('loginLink').style.display = 'inline';
-    //     document.getElementById('signupLink').style.display = 'inline';
-    //     document.getElementById('icon').style.display = 'none';
-    // }
+  
 
     const storedUser = localStorage.getItem('currentUser');
 
@@ -648,8 +573,6 @@ function checkLoginStatus() {
         document.getElementById('signupLink').style.display = 'none';
         document.getElementById('icon').style.display = 'inline';
         document.getElementById('logout').style.display = 'inline';
-
-        // alert(`Welcome back, ${currentUser.name}!`);
     } else {
         document.getElementById('loginLink').style.display = 'inline';
         document.getElementById('signupLink').style.display = 'inline';
@@ -675,33 +598,35 @@ let cart = [];
 // logout time....
 document.getElementById("logout").addEventListener('click',()=>{
     localStorage.removeItem("currentUser");
-    // cart = [];
-    // saveCart();
-    // updateCartCount();
-    // loadCart()
     
     document.getElementById('loginLink').style.display = 'inline';
     document.getElementById('signupLink').style.display = 'inline';
     document.getElementById('icon').style.display = 'none';
     document.getElementById('logout').style.display = 'none';
     // document.getElementById("cart-modal").style.display='none'
-    homes()
-    
-    // window.location.reload();
-    // window.onload=loadCart;
-    // alert('You have successfully logged out!');
-    
-    // window.onload=loadCart;
+    homes();
 })
 
 
-// function loadCart(){
-//     const storedCart=localStorage.getItem("cart");
-//     if(storedCart){
-//         cart=JSON.parse(storedCart);
-//         updateCartCount();
-//     }
-// }
+function updateCartButton(){
+    document.querySelectorAll(".cart-button").forEach((button)=>{
+        const productElement=button.closest(".crd");
+        const productId=parseInt(productElement.id);
+        // const productId=productElement.dataset.id;
+        const inCart=cart.some(item=>item.id===productId);
+        
+         if (inCart) {
+            button.textContent="Go to Cart";
+            button.style.backgroundColor = "green"; 
+            button.style.color = "white"; 
+        } 
+        else{
+            button.textContent="Add to Cart";
+            button.style.color="white";
+            button.style.backgroundColor="rgb(2, 164, 164)"
+        }
+    })
+}
 
 function loadCart() {
     const storedUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -717,6 +642,7 @@ function loadCart() {
                 if (data.success) {
                     cart = data.cart || [];
                     saveCart();
+                    updateCartButton();
                     updateCartCount();
                 }
             })
@@ -725,6 +651,7 @@ function loadCart() {
         // If no user is logged in, clear the cart
         cart = [];
         saveCart();
+        updateCartButton();
         updateCartCount();
     }
 }
@@ -734,20 +661,25 @@ function saveCart(){
 }
 
 
-function addCart(id, name, price,image) {
+function addCart(id, name, price,image,button) {
 
     if(! isLoggedIn()){
         alert("Please Login to add to cart");
         return;
     }
 
-  const itemIndex = cart.findIndex(item => item.id === id);
-  if (itemIndex >= 0) {
-    cart[itemIndex].quantity += 1;
-  } else {
-    cart.push({ id, name, price, quantity: 1,image });
-  }
-  saveCart();
+    const existingItem=cart.find(item=>item.id===id);
+    if(existingItem){
+        // alert("Redirecting to cart....");
+        openCart();
+    }
+    else {
+        cart.push({ id, name, price, quantity: 1, image });                                                                                                                                                               
+        saveCart();
+        updateCartButton();
+        alert("Product added to cart!");
+    } 
+    
 
    // Save the cart to the backend....
    const storedUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -772,7 +704,8 @@ function openCart() {
     document.getElementById("home").style.color="black";
     document.getElementById("shop").style.color="black";
     document.getElementById("contact").style.color="black";
-    document.getElementById("about").style.color="black"
+    document.getElementById("about").style.color="black";
+    document.getElementById("go-home").style.display="none";
     
   const cartModal = document.getElementById("cart-modal");
 
@@ -831,45 +764,10 @@ function closeCart() {
 
   cartModal.style.display='none';
 //   cartModal.classList.add("hidden");
+updateCartButton()
   homes();
 }
 
-// function updateQuantity(id, change) {
-//   const itemIndex = cart.findIndex(item => item.id === id);
-//   if (itemIndex >= 0) {
-//     cart[itemIndex].quantity += change;
-
-//     if (cart[itemIndex].quantity <= 0) {
-//       cart.splice(itemIndex, 1);
-//     }
-
-//     saveCart();
-//     updateCartCount();
-//     // Send the updated cart data to the server
-//     const storedUser = JSON.parse(localStorage.getItem("currentUser"));
-//     if (storedUser) {
-//         fetch('/update-cart', {
-//             method: 'POST',
-//             headers: { 'Content-Type': 'application/json' },
-//             body: JSON.stringify({
-//                 email: storedUser.email,
-//                 itemId: id,
-//                 quantity: cart[itemIndex] ? cart[itemIndex].quantity : 0, // Send updated quantity or 0 if item was removed
-//             }),
-//         })
-//         .then(response => response.json())
-//         .then(data => {
-//             if (!data.success) {
-//                 console.error('Error updating cart on the server:', data.message);
-//             }
-//         })
-//         .catch(error => console.error('Error updating cart on the server:', error));
-//     }
-//     // refresh.......
-//     openCart();
-    
-//   }
-// }
 
 function updateQuantity(id, change) {
     const itemIndex = cart.findIndex(item => item.id === id);
@@ -882,10 +780,13 @@ function updateQuantity(id, change) {
         if (updatedQuantity <= 0) {
             cart.splice(itemIndex, 1);
             updatedQuantity = 0; // Ensure we send 0 to the server
+            
+            updateCartButton();
         }
 
         saveCart(); // Save the updated cart locally
         updateCartCount(); // Update UI cart count
+        updateCartButton(); // update  
 
         // Send the updated cart data to the server
         const storedUser = JSON.parse(localStorage.getItem("currentUser"));
