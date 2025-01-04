@@ -5,13 +5,6 @@
       "password": "hii",
       "cart": [
         {
-          "id": 5,
-          "name": "Trending Girl Top's",
-          "price": 20,
-          "quantity": 1,
-          "image": "./assets/images/wn5.webp"
-        },
-        {
           "id": 6,
           "name": "Trending Girl Top's",
           "price": 20,
