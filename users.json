@@ -8,29 +8,39 @@
           "id": 6,
           "name": "Trending Girl Top's",
           "price": 20,
-          "quantity": 1,
+          "quantity": 40,
           "image": "./assets/images/wn6.webp"
         },
         {
           "id": 8,
           "name": "Trending Shoes",
           "price": "30",
-          "quantity": 1,
+          "quantity": 30,
           "image": "./assets/images/shoes.jpg"
         },
         {
           "id": 9,
           "name": "Trending Crocks",
           "price": "25",
-          "quantity": 1,
+          "quantity": 18,
           "image": "./assets/images/crocks.jpg"
         },
         {
           "id": 11,
           "name": "Trending Handbags",
           "price": "32",
-          "quantity": 1,
+          "quantity": 36,
           "image": "./assets/images/handbag.jpg"
+        },
+        {
+          "quantity": 1
+        },
+        {
+          "id": 2,
+          "name": "Cutton Trending Shirt's",
+          "price": 20,
+          "quantity": 32,
+          "image": "./assets/images/srt2.webp"
         }
       ]
     },

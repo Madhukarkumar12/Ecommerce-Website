@@ -317,7 +317,7 @@ function createProductSection(titleText, products) {
          addToCartButton.className = 'cart-button';
          addToCartButton.textContent = 'Add to Cart';
          addToCartButton.onclick = function () {
-             addCart(product.id, product.name, product.price, product.image,this);
+             addCart(product.id, product.name, product.price, product.image,this,product.maxCnt);
             //  updateCartButton();
          };
          crdTextDiv.appendChild(addToCartButton);
@@ -349,15 +349,15 @@ const sectionsData = [
         products: [
             { name: 'Trending Slipper', image: './assets/images/slipper.jpg', alt: 'Slipper',
                 descr:'A slipper is a comfortable, lightweight footwear designed for indoor use. Typically made from soft materials like fabric or foam',
-                price:'20',id:7
+                price:'20',id:7,maxCnt:5
              },
             { name: 'Trending Shoes', image: './assets/images/shoes.jpg', alt: 'Shoes',
                 descr:'A shoes is a comfortable, lightweight footwear designed for indoor use. Typically made from soft materials like fabric or foam',
-                price:'30',id:8
+                price:'30',id:8,maxCnt:6
              },
             { name: 'Trending Crocks', image: './assets/images/crocks.jpg', alt: 'Crocks',
                 descr:'A slipper is a comfortable, lightweight footwear designed for indoor use. Typically made from soft materials like fabric or foam',
-                price:'25',id:9
+                price:'25',id:9,maxCnt:7
              }
         ]
         
@@ -368,15 +368,15 @@ const sectionsData = [
         products: [
             { name: 'Trending Backpacks', image: './assets/images/bagpack.jpg', alt: 'Backpack' ,
                 descr:'Backpacks are versatile, portable bags designed to be worn on the back with two shoulder straps.',
-                price:'40',id:10
+                price:'40',id:10,maxCnt:7
             },
             { name: 'Trending Handbags', image: './assets/images/handbag.jpg', alt: 'Handbag',
                 descr:'A handbag is a stylish, portable accessory designed for carrying personal items such as wallets, makeup, and keys.',
-                price:'32',id:11
+                price:'32',id:11,maxCnt:4
              },
             { name: 'Trending Travel-bags', image: './assets/images/travelling_bag.jpg', alt: 'Travel Bag' ,
                  descr:'A traveling bag is a durable, spacious luggage designed for long-distance travel. It typically features compartments for organizing clothes',
-                 price:'50',id:12
+                 price:'50',id:12,maxCnt:4
             }
         ]
     },
@@ -385,15 +385,15 @@ const sectionsData = [
         products: [
             { name: 'Trending Watches', image: './assets/images/watch.jpg', alt: 'Watch',
                 descr:'A watch is a timekeeping device worn on the wrist, typically consisting of a dial, hands, and a strap.',
-                price:'80',id:13
+                price:'80',id:13,maxCnt:8
             },
             { name: 'Trending Sun-glass', image: './assets/images/sunglass.jpg', alt: 'Sunglass' ,
                 descr:'Sunglasses are protective eyewear designed to shield the eyes from harmful UV rays and glare. ',
-                price:'60',id:14
+                price:'60',id:14,maxCnt:9
             },
             { name: 'Trending Belt', image: './assets/images/belt.jpg', alt: 'Belt',
                 descr:'A belt is a flexible band, typically made of leather or fabric, worn around the waist to secure clothing or as a fashion accessory.',
-                price:'70',id:15
+                price:'70',id:15,maxCnt:10
              }
         ]
     }
@@ -552,6 +552,7 @@ function login(event) {
                 document.getElementById('signupLink').style.display = 'none';
                 document.getElementById('icon').style.display = 'inline';
                 document.getElementById('logout').style.display='inline';
+                document.getElementById('connect').style.display='none';
                 closeLoginModal();
             } else {
                 alert(data.message);
@@ -598,7 +599,7 @@ let cart = [];
 // logout time....
 document.getElementById("logout").addEventListener('click',()=>{
     localStorage.removeItem("currentUser");
-    
+    document.getElementById('connect').style.display='inline'
     document.getElementById('loginLink').style.display = 'inline';
     document.getElementById('signupLink').style.display = 'inline';
     document.getElementById('icon').style.display = 'none';
@@ -661,7 +662,7 @@ function saveCart(){
 }
 
 
-function addCart(id, name, price,image,button) {
+function addCart(id, name, price,image,button,maxCnt) {
 
     if(! isLoggedIn()){
         alert("Please Login to add to cart");
@@ -669,12 +670,13 @@ function addCart(id, name, price,image,button) {
     }
 
     const existingItem=cart.find(item=>item.id===id);
+
     if(existingItem){
         // alert("Redirecting to cart....");
         openCart();
     }
     else {
-        cart.push({ id, name, price, quantity: 1, image });                                                                                                                                                               
+        cart.push({ id, name, price, quantity: 1, maxCnt, image });                                                                                                                                                               
         saveCart();
         updateCartButton();
         alert("Product added to cart!");
@@ -732,9 +734,9 @@ function openCart() {
   </div>
 
   <div style="display: flex; align-items: center; gap: 5px;">
-    <button onclick="updateQuantity(${item.id}, -1)" style="padding: 5px 10px; border: none; background-color: #ff4d4d; color: white; border-radius: 5px; cursor: pointer; font-size: 12px;">-</button>
+    <button onclick="updateQuantity(${item.id}, -1, ${item.maxCnt})" style="padding: 5px 10px; border: none; background-color: #ff4d4d; color: white; border-radius: 5px; cursor: pointer; font-size: 12px;">-</button>
     <span style="min-width: 20px; text-align: center; font-size: 14px;">${item.quantity}</span>
-    <button onclick="updateQuantity(${item.id}, 1)" style="padding: 5px 10px; border: none; background-color: #4caf50; color: white; border-radius: 5px; cursor: pointer; font-size: 12px;">+</button>
+    <button onclick="updateQuantity(${item.id}, 1, ${item.maxCnt})" style="padding: 5px 10px; border: none; background-color: #4caf50; color: white; border-radius: 5px; cursor: pointer; font-size: 12px;">+</button>
   </div>
 </div>
 
@@ -769,19 +771,17 @@ updateCartButton()
 }
 
 
-function updateQuantity(id, change) {
+function updateQuantity(id, change, maxCnt) {
     const itemIndex = cart.findIndex(item => item.id === id);
     if (itemIndex >= 0) {
-        cart[itemIndex].quantity += change;
-
-        let updatedQuantity = cart[itemIndex].quantity;
-
-        // Remove the item locally if quantity is zero or less
-        if (updatedQuantity <= 0) {
-            cart.splice(itemIndex, 1);
-            updatedQuantity = 0; // Ensure we send 0 to the server
-            
-            updateCartButton();
+        const newQuantity = cart[itemIndex].quantity + change;
+        if (newQuantity > maxCnt) {
+            alert(`You can't add more than ${maxCnt} of this item.`);
+            return;
+        } else if (newQuantity <= 0) {
+            cart.splice(itemIndex, 1); 
+        } else {
+            cart[itemIndex].quantity = newQuantity; 
         }
 
         saveCart(); // Save the updated cart locally
@@ -797,7 +797,7 @@ function updateQuantity(id, change) {
                 body: JSON.stringify({
                     email: storedUser.email,
                     itemId: id,
-                    quantity: updatedQuantity, // Send the updated quantity or 0
+                    quantity: newQuantity, // Send the updated quantity or 0
                 }),
             })
             .then(response => response.json())
@@ -809,7 +809,7 @@ function updateQuantity(id, change) {
             .catch(error => console.error('Error updating cart on the server:', error));
         }
 
-        // Refresh the UI (optional, based on your implementation)
+        
         openCart();
     }
 }
